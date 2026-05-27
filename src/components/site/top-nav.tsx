@@ -1,5 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Search, Sun, Moon, User, LogOut, ListVideo, History } from "lucide-react";
+import { Search, Sun, Moon, User, LogOut, ListVideo, History, Upload, Film } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useTheme } from "@/lib/theme";
 import { useAuth } from "@/lib/auth";
@@ -112,6 +112,17 @@ export function TopNav() {
                 <DropdownMenuItem asChild>
                   <Link to="/profil">
                     <User className="mr-2 h-4 w-4" /> Mon profil
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link to="/televerser">
+                    <Upload className="mr-2 h-4 w-4" /> Téléverser
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/mes-contenus">
+                    <Film className="mr-2 h-4 w-4" /> Mes contenus
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
