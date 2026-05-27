@@ -24,6 +24,7 @@ import { Route as TitreSlugRouteImport } from './routes/titre.$slug'
 import { Route as RegarderSlugRouteImport } from './routes/regarder.$slug'
 import { Route as AuthenticatedTeleverserRouteImport } from './routes/_authenticated/televerser'
 import { Route as AuthenticatedProfilRouteImport } from './routes/_authenticated/profil'
+import { Route as AuthenticatedMesContenusRouteImport } from './routes/_authenticated/mes-contenus'
 import { Route as AuthenticatedMaListeRouteImport } from './routes/_authenticated/ma-liste'
 import { Route as AuthenticatedHistoriqueRouteImport } from './routes/_authenticated/historique'
 import { Route as ApiPublicBunnyWebhookRouteImport } from './routes/api/public/bunny-webhook'
@@ -102,6 +103,12 @@ const AuthenticatedProfilRoute = AuthenticatedProfilRouteImport.update({
   path: '/profil',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedMesContenusRoute =
+  AuthenticatedMesContenusRouteImport.update({
+    id: '/mes-contenus',
+    path: '/mes-contenus',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 const AuthenticatedMaListeRoute = AuthenticatedMaListeRouteImport.update({
   id: '/ma-liste',
   path: '/ma-liste',
@@ -131,6 +138,7 @@ export interface FileRoutesByFullPath {
   '/tarifs': typeof TarifsRoute
   '/historique': typeof AuthenticatedHistoriqueRoute
   '/ma-liste': typeof AuthenticatedMaListeRoute
+  '/mes-contenus': typeof AuthenticatedMesContenusRoute
   '/profil': typeof AuthenticatedProfilRoute
   '/televerser': typeof AuthenticatedTeleverserRoute
   '/regarder/$slug': typeof RegarderSlugRoute
@@ -150,6 +158,7 @@ export interface FileRoutesByTo {
   '/tarifs': typeof TarifsRoute
   '/historique': typeof AuthenticatedHistoriqueRoute
   '/ma-liste': typeof AuthenticatedMaListeRoute
+  '/mes-contenus': typeof AuthenticatedMesContenusRoute
   '/profil': typeof AuthenticatedProfilRoute
   '/televerser': typeof AuthenticatedTeleverserRoute
   '/regarder/$slug': typeof RegarderSlugRoute
@@ -171,6 +180,7 @@ export interface FileRoutesById {
   '/tarifs': typeof TarifsRoute
   '/_authenticated/historique': typeof AuthenticatedHistoriqueRoute
   '/_authenticated/ma-liste': typeof AuthenticatedMaListeRoute
+  '/_authenticated/mes-contenus': typeof AuthenticatedMesContenusRoute
   '/_authenticated/profil': typeof AuthenticatedProfilRoute
   '/_authenticated/televerser': typeof AuthenticatedTeleverserRoute
   '/regarder/$slug': typeof RegarderSlugRoute
@@ -192,6 +202,7 @@ export interface FileRouteTypes {
     | '/tarifs'
     | '/historique'
     | '/ma-liste'
+    | '/mes-contenus'
     | '/profil'
     | '/televerser'
     | '/regarder/$slug'
@@ -211,6 +222,7 @@ export interface FileRouteTypes {
     | '/tarifs'
     | '/historique'
     | '/ma-liste'
+    | '/mes-contenus'
     | '/profil'
     | '/televerser'
     | '/regarder/$slug'
@@ -231,6 +243,7 @@ export interface FileRouteTypes {
     | '/tarifs'
     | '/_authenticated/historique'
     | '/_authenticated/ma-liste'
+    | '/_authenticated/mes-contenus'
     | '/_authenticated/profil'
     | '/_authenticated/televerser'
     | '/regarder/$slug'
@@ -362,6 +375,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedProfilRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/mes-contenus': {
+      id: '/_authenticated/mes-contenus'
+      path: '/mes-contenus'
+      fullPath: '/mes-contenus'
+      preLoaderRoute: typeof AuthenticatedMesContenusRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/ma-liste': {
       id: '/_authenticated/ma-liste'
       path: '/ma-liste'
@@ -389,6 +409,7 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteChildren {
   AuthenticatedHistoriqueRoute: typeof AuthenticatedHistoriqueRoute
   AuthenticatedMaListeRoute: typeof AuthenticatedMaListeRoute
+  AuthenticatedMesContenusRoute: typeof AuthenticatedMesContenusRoute
   AuthenticatedProfilRoute: typeof AuthenticatedProfilRoute
   AuthenticatedTeleverserRoute: typeof AuthenticatedTeleverserRoute
 }
@@ -396,6 +417,7 @@ interface AuthenticatedRouteChildren {
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedHistoriqueRoute: AuthenticatedHistoriqueRoute,
   AuthenticatedMaListeRoute: AuthenticatedMaListeRoute,
+  AuthenticatedMesContenusRoute: AuthenticatedMesContenusRoute,
   AuthenticatedProfilRoute: AuthenticatedProfilRoute,
   AuthenticatedTeleverserRoute: AuthenticatedTeleverserRoute,
 }
