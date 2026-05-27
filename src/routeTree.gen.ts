@@ -25,6 +25,7 @@ import { Route as RegarderSlugRouteImport } from './routes/regarder.$slug'
 import { Route as AuthenticatedProfilRouteImport } from './routes/_authenticated/profil'
 import { Route as AuthenticatedMaListeRouteImport } from './routes/_authenticated/ma-liste'
 import { Route as AuthenticatedHistoriqueRouteImport } from './routes/_authenticated/historique'
+import { Route as ApiPublicBunnyWebhookRouteImport } from './routes/api/public/bunny-webhook'
 
 const TarifsRoute = TarifsRouteImport.update({
   id: '/tarifs',
@@ -105,6 +106,11 @@ const AuthenticatedHistoriqueRoute = AuthenticatedHistoriqueRouteImport.update({
   path: '/historique',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const ApiPublicBunnyWebhookRoute = ApiPublicBunnyWebhookRouteImport.update({
+  id: '/api/public/bunny-webhook',
+  path: '/api/public/bunny-webhook',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -122,6 +128,7 @@ export interface FileRoutesByFullPath {
   '/profil': typeof AuthenticatedProfilRoute
   '/regarder/$slug': typeof RegarderSlugRoute
   '/titre/$slug': typeof TitreSlugRoute
+  '/api/public/bunny-webhook': typeof ApiPublicBunnyWebhookRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -139,6 +146,7 @@ export interface FileRoutesByTo {
   '/profil': typeof AuthenticatedProfilRoute
   '/regarder/$slug': typeof RegarderSlugRoute
   '/titre/$slug': typeof TitreSlugRoute
+  '/api/public/bunny-webhook': typeof ApiPublicBunnyWebhookRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -158,6 +166,7 @@ export interface FileRoutesById {
   '/_authenticated/profil': typeof AuthenticatedProfilRoute
   '/regarder/$slug': typeof RegarderSlugRoute
   '/titre/$slug': typeof TitreSlugRoute
+  '/api/public/bunny-webhook': typeof ApiPublicBunnyWebhookRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -177,6 +186,7 @@ export interface FileRouteTypes {
     | '/profil'
     | '/regarder/$slug'
     | '/titre/$slug'
+    | '/api/public/bunny-webhook'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -194,6 +204,7 @@ export interface FileRouteTypes {
     | '/profil'
     | '/regarder/$slug'
     | '/titre/$slug'
+    | '/api/public/bunny-webhook'
   id:
     | '__root__'
     | '/'
@@ -212,6 +223,7 @@ export interface FileRouteTypes {
     | '/_authenticated/profil'
     | '/regarder/$slug'
     | '/titre/$slug'
+    | '/api/public/bunny-webhook'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -228,6 +240,7 @@ export interface RootRouteChildren {
   TarifsRoute: typeof TarifsRoute
   RegarderSlugRoute: typeof RegarderSlugRoute
   TitreSlugRoute: typeof TitreSlugRoute
+  ApiPublicBunnyWebhookRoute: typeof ApiPublicBunnyWebhookRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -344,6 +357,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedHistoriqueRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/api/public/bunny-webhook': {
+      id: '/api/public/bunny-webhook'
+      path: '/api/public/bunny-webhook'
+      fullPath: '/api/public/bunny-webhook'
+      preLoaderRoute: typeof ApiPublicBunnyWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -377,6 +397,7 @@ const rootRouteChildren: RootRouteChildren = {
   TarifsRoute: TarifsRoute,
   RegarderSlugRoute: RegarderSlugRoute,
   TitreSlugRoute: TitreSlugRoute,
+  ApiPublicBunnyWebhookRoute: ApiPublicBunnyWebhookRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
