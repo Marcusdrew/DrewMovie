@@ -9,38 +9,208 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TarifsRouteImport } from './routes/tarifs'
+import { Route as RechercheRouteImport } from './routes/recherche'
+import { Route as InscriptionRouteImport } from './routes/inscription'
+import { Route as DecouvrirRouteImport } from './routes/decouvrir'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as ConnexionRouteImport } from './routes/connexion'
+import { Route as AideRouteImport } from './routes/aide'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TitreSlugRouteImport } from './routes/titre.$slug'
+import { Route as RegarderSlugRouteImport } from './routes/regarder.$slug'
 
+const TarifsRoute = TarifsRouteImport.update({
+  id: '/tarifs',
+  path: '/tarifs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RechercheRoute = RechercheRouteImport.update({
+  id: '/recherche',
+  path: '/recherche',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InscriptionRoute = InscriptionRouteImport.update({
+  id: '/inscription',
+  path: '/inscription',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DecouvrirRoute = DecouvrirRouteImport.update({
+  id: '/decouvrir',
+  path: '/decouvrir',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConnexionRoute = ConnexionRouteImport.update({
+  id: '/connexion',
+  path: '/connexion',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AideRoute = AideRouteImport.update({
+  id: '/aide',
+  path: '/aide',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TitreSlugRoute = TitreSlugRouteImport.update({
+  id: '/titre/$slug',
+  path: '/titre/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegarderSlugRoute = RegarderSlugRouteImport.update({
+  id: '/regarder/$slug',
+  path: '/regarder/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/aide': typeof AideRoute
+  '/connexion': typeof ConnexionRoute
+  '/contact': typeof ContactRoute
+  '/decouvrir': typeof DecouvrirRoute
+  '/inscription': typeof InscriptionRoute
+  '/recherche': typeof RechercheRoute
+  '/tarifs': typeof TarifsRoute
+  '/regarder/$slug': typeof RegarderSlugRoute
+  '/titre/$slug': typeof TitreSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/aide': typeof AideRoute
+  '/connexion': typeof ConnexionRoute
+  '/contact': typeof ContactRoute
+  '/decouvrir': typeof DecouvrirRoute
+  '/inscription': typeof InscriptionRoute
+  '/recherche': typeof RechercheRoute
+  '/tarifs': typeof TarifsRoute
+  '/regarder/$slug': typeof RegarderSlugRoute
+  '/titre/$slug': typeof TitreSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/aide': typeof AideRoute
+  '/connexion': typeof ConnexionRoute
+  '/contact': typeof ContactRoute
+  '/decouvrir': typeof DecouvrirRoute
+  '/inscription': typeof InscriptionRoute
+  '/recherche': typeof RechercheRoute
+  '/tarifs': typeof TarifsRoute
+  '/regarder/$slug': typeof RegarderSlugRoute
+  '/titre/$slug': typeof TitreSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/aide'
+    | '/connexion'
+    | '/contact'
+    | '/decouvrir'
+    | '/inscription'
+    | '/recherche'
+    | '/tarifs'
+    | '/regarder/$slug'
+    | '/titre/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/aide'
+    | '/connexion'
+    | '/contact'
+    | '/decouvrir'
+    | '/inscription'
+    | '/recherche'
+    | '/tarifs'
+    | '/regarder/$slug'
+    | '/titre/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/aide'
+    | '/connexion'
+    | '/contact'
+    | '/decouvrir'
+    | '/inscription'
+    | '/recherche'
+    | '/tarifs'
+    | '/regarder/$slug'
+    | '/titre/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AideRoute: typeof AideRoute
+  ConnexionRoute: typeof ConnexionRoute
+  ContactRoute: typeof ContactRoute
+  DecouvrirRoute: typeof DecouvrirRoute
+  InscriptionRoute: typeof InscriptionRoute
+  RechercheRoute: typeof RechercheRoute
+  TarifsRoute: typeof TarifsRoute
+  RegarderSlugRoute: typeof RegarderSlugRoute
+  TitreSlugRoute: typeof TitreSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/tarifs': {
+      id: '/tarifs'
+      path: '/tarifs'
+      fullPath: '/tarifs'
+      preLoaderRoute: typeof TarifsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/recherche': {
+      id: '/recherche'
+      path: '/recherche'
+      fullPath: '/recherche'
+      preLoaderRoute: typeof RechercheRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/inscription': {
+      id: '/inscription'
+      path: '/inscription'
+      fullPath: '/inscription'
+      preLoaderRoute: typeof InscriptionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/decouvrir': {
+      id: '/decouvrir'
+      path: '/decouvrir'
+      fullPath: '/decouvrir'
+      preLoaderRoute: typeof DecouvrirRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/connexion': {
+      id: '/connexion'
+      path: '/connexion'
+      fullPath: '/connexion'
+      preLoaderRoute: typeof ConnexionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/aide': {
+      id: '/aide'
+      path: '/aide'
+      fullPath: '/aide'
+      preLoaderRoute: typeof AideRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +218,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/titre/$slug': {
+      id: '/titre/$slug'
+      path: '/titre/$slug'
+      fullPath: '/titre/$slug'
+      preLoaderRoute: typeof TitreSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/regarder/$slug': {
+      id: '/regarder/$slug'
+      path: '/regarder/$slug'
+      fullPath: '/regarder/$slug'
+      preLoaderRoute: typeof RegarderSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AideRoute: AideRoute,
+  ConnexionRoute: ConnexionRoute,
+  ContactRoute: ContactRoute,
+  DecouvrirRoute: DecouvrirRoute,
+  InscriptionRoute: InscriptionRoute,
+  RechercheRoute: RechercheRoute,
+  TarifsRoute: TarifsRoute,
+  RegarderSlugRoute: RegarderSlugRoute,
+  TitreSlugRoute: TitreSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

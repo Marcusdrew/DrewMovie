@@ -1,29 +1,29 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Hero } from "@/components/site/hero";
+import { ContentRow } from "@/components/site/content-row";
+import { FEATURED, RAILS } from "@/lib/mock-catalog";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Your App" },
-      { name: "description", content: "Replace this with a one-sentence description of your app." },
-      { property: "og:title", content: "Your App" },
-      { property: "og:description", content: "Replace this with a one-sentence description of your app." },
+      { title: "Lumière — Streaming premium pour créateurs et cinéphiles" },
+      { name: "description", content: "Films, séries et animation portés par des créateurs indépendants. Découvrez une nouvelle façon de regarder." },
+      { property: "og:title", content: "Lumière — Streaming premium" },
+      { property: "og:description", content: "Films, séries et animation portés par des créateurs indépendants." },
     ],
   }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div>
+      <Hero item={FEATURED} />
+      <div className="relative space-y-14 pt-4">
+        {RAILS.map((rail) => (
+          <ContentRow key={rail.title} title={rail.title} items={rail.items} />
+        ))}
+      </div>
     </div>
   );
 }
