@@ -22,6 +22,7 @@ import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TitreSlugRouteImport } from './routes/titre.$slug'
 import { Route as RegarderSlugRouteImport } from './routes/regarder.$slug'
+import { Route as AuthenticatedProfilRouteImport } from './routes/_authenticated/profil'
 import { Route as AuthenticatedMaListeRouteImport } from './routes/_authenticated/ma-liste'
 import { Route as AuthenticatedHistoriqueRouteImport } from './routes/_authenticated/historique'
 
@@ -89,6 +90,11 @@ const RegarderSlugRoute = RegarderSlugRouteImport.update({
   path: '/regarder/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedProfilRoute = AuthenticatedProfilRouteImport.update({
+  id: '/profil',
+  path: '/profil',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 const AuthenticatedMaListeRoute = AuthenticatedMaListeRouteImport.update({
   id: '/ma-liste',
   path: '/ma-liste',
@@ -113,6 +119,7 @@ export interface FileRoutesByFullPath {
   '/tarifs': typeof TarifsRoute
   '/historique': typeof AuthenticatedHistoriqueRoute
   '/ma-liste': typeof AuthenticatedMaListeRoute
+  '/profil': typeof AuthenticatedProfilRoute
   '/regarder/$slug': typeof RegarderSlugRoute
   '/titre/$slug': typeof TitreSlugRoute
 }
@@ -129,6 +136,7 @@ export interface FileRoutesByTo {
   '/tarifs': typeof TarifsRoute
   '/historique': typeof AuthenticatedHistoriqueRoute
   '/ma-liste': typeof AuthenticatedMaListeRoute
+  '/profil': typeof AuthenticatedProfilRoute
   '/regarder/$slug': typeof RegarderSlugRoute
   '/titre/$slug': typeof TitreSlugRoute
 }
@@ -147,6 +155,7 @@ export interface FileRoutesById {
   '/tarifs': typeof TarifsRoute
   '/_authenticated/historique': typeof AuthenticatedHistoriqueRoute
   '/_authenticated/ma-liste': typeof AuthenticatedMaListeRoute
+  '/_authenticated/profil': typeof AuthenticatedProfilRoute
   '/regarder/$slug': typeof RegarderSlugRoute
   '/titre/$slug': typeof TitreSlugRoute
 }
@@ -165,6 +174,7 @@ export interface FileRouteTypes {
     | '/tarifs'
     | '/historique'
     | '/ma-liste'
+    | '/profil'
     | '/regarder/$slug'
     | '/titre/$slug'
   fileRoutesByTo: FileRoutesByTo
@@ -181,6 +191,7 @@ export interface FileRouteTypes {
     | '/tarifs'
     | '/historique'
     | '/ma-liste'
+    | '/profil'
     | '/regarder/$slug'
     | '/titre/$slug'
   id:
@@ -198,6 +209,7 @@ export interface FileRouteTypes {
     | '/tarifs'
     | '/_authenticated/historique'
     | '/_authenticated/ma-liste'
+    | '/_authenticated/profil'
     | '/regarder/$slug'
     | '/titre/$slug'
   fileRoutesById: FileRoutesById
@@ -311,6 +323,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RegarderSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/profil': {
+      id: '/_authenticated/profil'
+      path: '/profil'
+      fullPath: '/profil'
+      preLoaderRoute: typeof AuthenticatedProfilRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/ma-liste': {
       id: '/_authenticated/ma-liste'
       path: '/ma-liste'
@@ -331,11 +350,13 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteChildren {
   AuthenticatedHistoriqueRoute: typeof AuthenticatedHistoriqueRoute
   AuthenticatedMaListeRoute: typeof AuthenticatedMaListeRoute
+  AuthenticatedProfilRoute: typeof AuthenticatedProfilRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedHistoriqueRoute: AuthenticatedHistoriqueRoute,
   AuthenticatedMaListeRoute: AuthenticatedMaListeRoute,
+  AuthenticatedProfilRoute: AuthenticatedProfilRoute,
 }
 
 const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
