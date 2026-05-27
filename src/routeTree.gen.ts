@@ -18,6 +18,7 @@ import { Route as ConnexionRouteImport } from './routes/connexion'
 import { Route as AideRouteImport } from './routes/aide'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TitreSlugRouteImport } from './routes/titre.$slug'
+import { Route as RegarderSlugRouteImport } from './routes/regarder.$slug'
 
 const TarifsRoute = TarifsRouteImport.update({
   id: '/tarifs',
@@ -64,6 +65,11 @@ const TitreSlugRoute = TitreSlugRouteImport.update({
   path: '/titre/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RegarderSlugRoute = RegarderSlugRouteImport.update({
+  id: '/regarder/$slug',
+  path: '/regarder/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -74,6 +80,7 @@ export interface FileRoutesByFullPath {
   '/inscription': typeof InscriptionRoute
   '/recherche': typeof RechercheRoute
   '/tarifs': typeof TarifsRoute
+  '/regarder/$slug': typeof RegarderSlugRoute
   '/titre/$slug': typeof TitreSlugRoute
 }
 export interface FileRoutesByTo {
@@ -85,6 +92,7 @@ export interface FileRoutesByTo {
   '/inscription': typeof InscriptionRoute
   '/recherche': typeof RechercheRoute
   '/tarifs': typeof TarifsRoute
+  '/regarder/$slug': typeof RegarderSlugRoute
   '/titre/$slug': typeof TitreSlugRoute
 }
 export interface FileRoutesById {
@@ -97,6 +105,7 @@ export interface FileRoutesById {
   '/inscription': typeof InscriptionRoute
   '/recherche': typeof RechercheRoute
   '/tarifs': typeof TarifsRoute
+  '/regarder/$slug': typeof RegarderSlugRoute
   '/titre/$slug': typeof TitreSlugRoute
 }
 export interface FileRouteTypes {
@@ -110,6 +119,7 @@ export interface FileRouteTypes {
     | '/inscription'
     | '/recherche'
     | '/tarifs'
+    | '/regarder/$slug'
     | '/titre/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -121,6 +131,7 @@ export interface FileRouteTypes {
     | '/inscription'
     | '/recherche'
     | '/tarifs'
+    | '/regarder/$slug'
     | '/titre/$slug'
   id:
     | '__root__'
@@ -132,6 +143,7 @@ export interface FileRouteTypes {
     | '/inscription'
     | '/recherche'
     | '/tarifs'
+    | '/regarder/$slug'
     | '/titre/$slug'
   fileRoutesById: FileRoutesById
 }
@@ -144,6 +156,7 @@ export interface RootRouteChildren {
   InscriptionRoute: typeof InscriptionRoute
   RechercheRoute: typeof RechercheRoute
   TarifsRoute: typeof TarifsRoute
+  RegarderSlugRoute: typeof RegarderSlugRoute
   TitreSlugRoute: typeof TitreSlugRoute
 }
 
@@ -212,6 +225,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TitreSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/regarder/$slug': {
+      id: '/regarder/$slug'
+      path: '/regarder/$slug'
+      fullPath: '/regarder/$slug'
+      preLoaderRoute: typeof RegarderSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -224,6 +244,7 @@ const rootRouteChildren: RootRouteChildren = {
   InscriptionRoute: InscriptionRoute,
   RechercheRoute: RechercheRoute,
   TarifsRoute: TarifsRoute,
+  RegarderSlugRoute: RegarderSlugRoute,
   TitreSlugRoute: TitreSlugRoute,
 }
 export const routeTree = rootRouteImport
