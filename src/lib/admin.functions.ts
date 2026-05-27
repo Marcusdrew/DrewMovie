@@ -38,7 +38,7 @@ export const adminSetStatus = createServerFn({ method: "POST" })
   )
   .handler(async ({ data, context }) => {
     await assertAdmin(context.userId);
-    const patch: Record<string, unknown> = { status: data.status };
+    const patch: { status: typeof data.status; published_at?: string } = { status: data.status };
     if (data.status === "ready") patch.published_at = new Date().toISOString();
     const { error } = await supabaseAdmin.from("content").update(patch).eq("id", data.contentId);
     if (error) throw new Error(error.message);
