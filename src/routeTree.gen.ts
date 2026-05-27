@@ -23,6 +23,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as TitreSlugRouteImport } from './routes/titre.$slug'
 import { Route as RegarderSlugRouteImport } from './routes/regarder.$slug'
 import { Route as AuthenticatedMaListeRouteImport } from './routes/_authenticated/ma-liste'
+import { Route as AuthenticatedHistoriqueRouteImport } from './routes/_authenticated/historique'
 
 const TarifsRoute = TarifsRouteImport.update({
   id: '/tarifs',
@@ -93,6 +94,11 @@ const AuthenticatedMaListeRoute = AuthenticatedMaListeRouteImport.update({
   path: '/ma-liste',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AuthenticatedHistoriqueRoute = AuthenticatedHistoriqueRouteImport.update({
+  id: '/historique',
+  path: '/historique',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -105,6 +111,7 @@ export interface FileRoutesByFullPath {
   '/recherche': typeof RechercheRoute
   '/reinitialiser-mot-de-passe': typeof ReinitialiserMotDePasseRoute
   '/tarifs': typeof TarifsRoute
+  '/historique': typeof AuthenticatedHistoriqueRoute
   '/ma-liste': typeof AuthenticatedMaListeRoute
   '/regarder/$slug': typeof RegarderSlugRoute
   '/titre/$slug': typeof TitreSlugRoute
@@ -120,6 +127,7 @@ export interface FileRoutesByTo {
   '/recherche': typeof RechercheRoute
   '/reinitialiser-mot-de-passe': typeof ReinitialiserMotDePasseRoute
   '/tarifs': typeof TarifsRoute
+  '/historique': typeof AuthenticatedHistoriqueRoute
   '/ma-liste': typeof AuthenticatedMaListeRoute
   '/regarder/$slug': typeof RegarderSlugRoute
   '/titre/$slug': typeof TitreSlugRoute
@@ -137,6 +145,7 @@ export interface FileRoutesById {
   '/recherche': typeof RechercheRoute
   '/reinitialiser-mot-de-passe': typeof ReinitialiserMotDePasseRoute
   '/tarifs': typeof TarifsRoute
+  '/_authenticated/historique': typeof AuthenticatedHistoriqueRoute
   '/_authenticated/ma-liste': typeof AuthenticatedMaListeRoute
   '/regarder/$slug': typeof RegarderSlugRoute
   '/titre/$slug': typeof TitreSlugRoute
@@ -154,6 +163,7 @@ export interface FileRouteTypes {
     | '/recherche'
     | '/reinitialiser-mot-de-passe'
     | '/tarifs'
+    | '/historique'
     | '/ma-liste'
     | '/regarder/$slug'
     | '/titre/$slug'
@@ -169,6 +179,7 @@ export interface FileRouteTypes {
     | '/recherche'
     | '/reinitialiser-mot-de-passe'
     | '/tarifs'
+    | '/historique'
     | '/ma-liste'
     | '/regarder/$slug'
     | '/titre/$slug'
@@ -185,6 +196,7 @@ export interface FileRouteTypes {
     | '/recherche'
     | '/reinitialiser-mot-de-passe'
     | '/tarifs'
+    | '/_authenticated/historique'
     | '/_authenticated/ma-liste'
     | '/regarder/$slug'
     | '/titre/$slug'
@@ -306,14 +318,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedMaListeRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_authenticated/historique': {
+      id: '/_authenticated/historique'
+      path: '/historique'
+      fullPath: '/historique'
+      preLoaderRoute: typeof AuthenticatedHistoriqueRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
   }
 }
 
 interface AuthenticatedRouteChildren {
+  AuthenticatedHistoriqueRoute: typeof AuthenticatedHistoriqueRoute
   AuthenticatedMaListeRoute: typeof AuthenticatedMaListeRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
+  AuthenticatedHistoriqueRoute: AuthenticatedHistoriqueRoute,
   AuthenticatedMaListeRoute: AuthenticatedMaListeRoute,
 }
 
