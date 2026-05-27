@@ -32,8 +32,8 @@ export function TopNav() {
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link to="/" className="group flex items-center gap-2.5">
-          <span className="relative grid h-8 w-8 place-items-center rounded-lg bg-gradient-brand shadow-[0_0_30px_-5px_oklch(0.7_0.22_320/0.6)]">
-            <span className="font-display text-base font-bold text-white">L</span>
+          <span className="relative grid h-8 w-8 place-items-center rounded-lg bg-foreground">
+            <span className="font-display text-base font-bold text-background">L</span>
           </span>
           <span className="font-display text-lg font-semibold tracking-tight">Lumière</span>
         </Link>
@@ -79,7 +79,7 @@ export function TopNav() {
           </button>
           <Link
             to="/connexion"
-            className="hidden h-9 items-center gap-2 rounded-full border border-glass-border bg-glass px-4 text-sm font-medium text-foreground transition-all hover:border-primary/40 hover:shadow-[0_0_20px_-5px_oklch(0.7_0.22_320/0.5)] sm:inline-flex"
+            className="hidden h-9 items-center gap-2 rounded-full border border-glass-border bg-glass px-4 text-sm font-medium text-foreground transition-colors hover:bg-secondary sm:inline-flex"
           >
             <User className="h-3.5 w-3.5" />
             Se connecter
