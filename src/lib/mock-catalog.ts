@@ -17,9 +17,10 @@ export interface MockContent {
 // Posters générés via gradients déterministes (Phase 1, sans appels image).
 // Remplacés par de vraies images en Phase 2 (imagegen ou TMDB).
 function poster(seed: number) {
-  const h1 = (seed * 47) % 360;
-  const h2 = (h1 + 60) % 360;
-  return `linear-gradient(135deg, oklch(0.45 0.22 ${h1}), oklch(0.65 0.25 ${h2}))`;
+  // Posters neutres : nuances de gris déterministes, pas d'effet arc-en-ciel.
+  const l1 = 0.22 + ((seed * 13) % 15) / 100; // 0.22 - 0.37
+  const l2 = 0.4 + ((seed * 17) % 18) / 100; // 0.40 - 0.58
+  return `linear-gradient(135deg, oklch(${l1.toFixed(2)} 0 0), oklch(${l2.toFixed(2)} 0 0))`;
 }
 
 export const MOCK_CATALOG: MockContent[] = [
