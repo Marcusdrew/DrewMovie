@@ -11,7 +11,7 @@ export function Hero({ item }: { item: MockContent }) {
         aria-hidden
         className="absolute inset-0 -z-10"
         style={{
-          background: `radial-gradient(60% 80% at 70% 30%, oklch(0.55 0.25 ${item.backdropHue} / 0.6), transparent 70%), linear-gradient(180deg, oklch(0.18 0.05 ${item.backdropHue}) 0%, var(--background) 90%)`,
+          background: `radial-gradient(60% 80% at 70% 30%, oklch(0.3 0 0 / 0.8), transparent 70%), linear-gradient(180deg, oklch(0.18 0 0) 0%, var(--background) 90%)`,
         }}
       />
       <div className="aurora -z-10" aria-hidden />
