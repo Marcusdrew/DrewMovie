@@ -11,8 +11,10 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TarifsRouteImport } from './routes/tarifs'
 import { Route as RechercheRouteImport } from './routes/recherche'
+import { Route as InscriptionRouteImport } from './routes/inscription'
 import { Route as DecouvrirRouteImport } from './routes/decouvrir'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as ConnexionRouteImport } from './routes/connexion'
 import { Route as AideRouteImport } from './routes/aide'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TitreSlugRouteImport } from './routes/titre.$slug'
@@ -27,6 +29,11 @@ const RechercheRoute = RechercheRouteImport.update({
   path: '/recherche',
   getParentRoute: () => rootRouteImport,
 } as any)
+const InscriptionRoute = InscriptionRouteImport.update({
+  id: '/inscription',
+  path: '/inscription',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DecouvrirRoute = DecouvrirRouteImport.update({
   id: '/decouvrir',
   path: '/decouvrir',
@@ -35,6 +42,11 @@ const DecouvrirRoute = DecouvrirRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConnexionRoute = ConnexionRouteImport.update({
+  id: '/connexion',
+  path: '/connexion',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AideRoute = AideRouteImport.update({
@@ -56,8 +68,10 @@ const TitreSlugRoute = TitreSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/aide': typeof AideRoute
+  '/connexion': typeof ConnexionRoute
   '/contact': typeof ContactRoute
   '/decouvrir': typeof DecouvrirRoute
+  '/inscription': typeof InscriptionRoute
   '/recherche': typeof RechercheRoute
   '/tarifs': typeof TarifsRoute
   '/titre/$slug': typeof TitreSlugRoute
@@ -65,8 +79,10 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/aide': typeof AideRoute
+  '/connexion': typeof ConnexionRoute
   '/contact': typeof ContactRoute
   '/decouvrir': typeof DecouvrirRoute
+  '/inscription': typeof InscriptionRoute
   '/recherche': typeof RechercheRoute
   '/tarifs': typeof TarifsRoute
   '/titre/$slug': typeof TitreSlugRoute
@@ -75,8 +91,10 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/aide': typeof AideRoute
+  '/connexion': typeof ConnexionRoute
   '/contact': typeof ContactRoute
   '/decouvrir': typeof DecouvrirRoute
+  '/inscription': typeof InscriptionRoute
   '/recherche': typeof RechercheRoute
   '/tarifs': typeof TarifsRoute
   '/titre/$slug': typeof TitreSlugRoute
@@ -86,8 +104,10 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/aide'
+    | '/connexion'
     | '/contact'
     | '/decouvrir'
+    | '/inscription'
     | '/recherche'
     | '/tarifs'
     | '/titre/$slug'
@@ -95,8 +115,10 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/aide'
+    | '/connexion'
     | '/contact'
     | '/decouvrir'
+    | '/inscription'
     | '/recherche'
     | '/tarifs'
     | '/titre/$slug'
@@ -104,8 +126,10 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/aide'
+    | '/connexion'
     | '/contact'
     | '/decouvrir'
+    | '/inscription'
     | '/recherche'
     | '/tarifs'
     | '/titre/$slug'
@@ -114,8 +138,10 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AideRoute: typeof AideRoute
+  ConnexionRoute: typeof ConnexionRoute
   ContactRoute: typeof ContactRoute
   DecouvrirRoute: typeof DecouvrirRoute
+  InscriptionRoute: typeof InscriptionRoute
   RechercheRoute: typeof RechercheRoute
   TarifsRoute: typeof TarifsRoute
   TitreSlugRoute: typeof TitreSlugRoute
@@ -137,6 +163,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RechercheRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/inscription': {
+      id: '/inscription'
+      path: '/inscription'
+      fullPath: '/inscription'
+      preLoaderRoute: typeof InscriptionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/decouvrir': {
       id: '/decouvrir'
       path: '/decouvrir'
@@ -149,6 +182,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/connexion': {
+      id: '/connexion'
+      path: '/connexion'
+      fullPath: '/connexion'
+      preLoaderRoute: typeof ConnexionRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/aide': {
@@ -178,8 +218,10 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AideRoute: AideRoute,
+  ConnexionRoute: ConnexionRoute,
   ContactRoute: ContactRoute,
   DecouvrirRoute: DecouvrirRoute,
+  InscriptionRoute: InscriptionRoute,
   RechercheRoute: RechercheRoute,
   TarifsRoute: TarifsRoute,
   TitreSlugRoute: TitreSlugRoute,
