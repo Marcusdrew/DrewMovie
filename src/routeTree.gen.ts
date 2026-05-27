@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as TarifsRouteImport } from './routes/tarifs'
 import { Route as RechercheRouteImport } from './routes/recherche'
 import { Route as DecouvrirRouteImport } from './routes/decouvrir'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AideRouteImport } from './routes/aide'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TitreSlugRouteImport } from './routes/titre.$slug'
@@ -29,6 +30,11 @@ const RechercheRoute = RechercheRouteImport.update({
 const DecouvrirRoute = DecouvrirRouteImport.update({
   id: '/decouvrir',
   path: '/decouvrir',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AideRoute = AideRouteImport.update({
@@ -50,6 +56,7 @@ const TitreSlugRoute = TitreSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/aide': typeof AideRoute
+  '/contact': typeof ContactRoute
   '/decouvrir': typeof DecouvrirRoute
   '/recherche': typeof RechercheRoute
   '/tarifs': typeof TarifsRoute
@@ -58,6 +65,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/aide': typeof AideRoute
+  '/contact': typeof ContactRoute
   '/decouvrir': typeof DecouvrirRoute
   '/recherche': typeof RechercheRoute
   '/tarifs': typeof TarifsRoute
@@ -67,6 +75,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/aide': typeof AideRoute
+  '/contact': typeof ContactRoute
   '/decouvrir': typeof DecouvrirRoute
   '/recherche': typeof RechercheRoute
   '/tarifs': typeof TarifsRoute
@@ -77,16 +86,25 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/aide'
+    | '/contact'
     | '/decouvrir'
     | '/recherche'
     | '/tarifs'
     | '/titre/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/aide' | '/decouvrir' | '/recherche' | '/tarifs' | '/titre/$slug'
+  to:
+    | '/'
+    | '/aide'
+    | '/contact'
+    | '/decouvrir'
+    | '/recherche'
+    | '/tarifs'
+    | '/titre/$slug'
   id:
     | '__root__'
     | '/'
     | '/aide'
+    | '/contact'
     | '/decouvrir'
     | '/recherche'
     | '/tarifs'
@@ -96,6 +114,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AideRoute: typeof AideRoute
+  ContactRoute: typeof ContactRoute
   DecouvrirRoute: typeof DecouvrirRoute
   RechercheRoute: typeof RechercheRoute
   TarifsRoute: typeof TarifsRoute
@@ -125,6 +144,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DecouvrirRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/aide': {
       id: '/aide'
       path: '/aide'
@@ -152,6 +178,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AideRoute: AideRoute,
+  ContactRoute: ContactRoute,
   DecouvrirRoute: DecouvrirRoute,
   RechercheRoute: RechercheRoute,
   TarifsRoute: TarifsRoute,
