@@ -9,11 +9,17 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TarifsRouteImport } from './routes/tarifs'
 import { Route as RechercheRouteImport } from './routes/recherche'
 import { Route as DecouvrirRouteImport } from './routes/decouvrir'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TitreSlugRouteImport } from './routes/titre.$slug'
 
+const TarifsRoute = TarifsRouteImport.update({
+  id: '/tarifs',
+  path: '/tarifs',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RechercheRoute = RechercheRouteImport.update({
   id: '/recherche',
   path: '/recherche',
@@ -39,12 +45,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/decouvrir': typeof DecouvrirRoute
   '/recherche': typeof RechercheRoute
+  '/tarifs': typeof TarifsRoute
   '/titre/$slug': typeof TitreSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/decouvrir': typeof DecouvrirRoute
   '/recherche': typeof RechercheRoute
+  '/tarifs': typeof TarifsRoute
   '/titre/$slug': typeof TitreSlugRoute
 }
 export interface FileRoutesById {
@@ -52,25 +60,40 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/decouvrir': typeof DecouvrirRoute
   '/recherche': typeof RechercheRoute
+  '/tarifs': typeof TarifsRoute
   '/titre/$slug': typeof TitreSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/decouvrir' | '/recherche' | '/titre/$slug'
+  fullPaths: '/' | '/decouvrir' | '/recherche' | '/tarifs' | '/titre/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/decouvrir' | '/recherche' | '/titre/$slug'
-  id: '__root__' | '/' | '/decouvrir' | '/recherche' | '/titre/$slug'
+  to: '/' | '/decouvrir' | '/recherche' | '/tarifs' | '/titre/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/decouvrir'
+    | '/recherche'
+    | '/tarifs'
+    | '/titre/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DecouvrirRoute: typeof DecouvrirRoute
   RechercheRoute: typeof RechercheRoute
+  TarifsRoute: typeof TarifsRoute
   TitreSlugRoute: typeof TitreSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/tarifs': {
+      id: '/tarifs'
+      path: '/tarifs'
+      fullPath: '/tarifs'
+      preLoaderRoute: typeof TarifsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/recherche': {
       id: '/recherche'
       path: '/recherche'
@@ -106,6 +129,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DecouvrirRoute: DecouvrirRoute,
   RechercheRoute: RechercheRoute,
+  TarifsRoute: TarifsRoute,
   TitreSlugRoute: TitreSlugRoute,
 }
 export const routeTree = rootRouteImport
