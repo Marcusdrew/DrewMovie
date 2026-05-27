@@ -18,9 +18,11 @@ import { Route as DecouvrirRouteImport } from './routes/decouvrir'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ConnexionRouteImport } from './routes/connexion'
 import { Route as AideRouteImport } from './routes/aide'
+import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TitreSlugRouteImport } from './routes/titre.$slug'
 import { Route as RegarderSlugRouteImport } from './routes/regarder.$slug'
+import { Route as AuthenticatedMaListeRouteImport } from './routes/_authenticated/ma-liste'
 
 const TarifsRoute = TarifsRouteImport.update({
   id: '/tarifs',
@@ -67,6 +69,10 @@ const AideRoute = AideRouteImport.update({
   path: '/aide',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRoute = AuthenticatedRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -82,6 +88,11 @@ const RegarderSlugRoute = RegarderSlugRouteImport.update({
   path: '/regarder/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedMaListeRoute = AuthenticatedMaListeRouteImport.update({
+  id: '/ma-liste',
+  path: '/ma-liste',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -94,6 +105,7 @@ export interface FileRoutesByFullPath {
   '/recherche': typeof RechercheRoute
   '/reinitialiser-mot-de-passe': typeof ReinitialiserMotDePasseRoute
   '/tarifs': typeof TarifsRoute
+  '/ma-liste': typeof AuthenticatedMaListeRoute
   '/regarder/$slug': typeof RegarderSlugRoute
   '/titre/$slug': typeof TitreSlugRoute
 }
@@ -108,12 +120,14 @@ export interface FileRoutesByTo {
   '/recherche': typeof RechercheRoute
   '/reinitialiser-mot-de-passe': typeof ReinitialiserMotDePasseRoute
   '/tarifs': typeof TarifsRoute
+  '/ma-liste': typeof AuthenticatedMaListeRoute
   '/regarder/$slug': typeof RegarderSlugRoute
   '/titre/$slug': typeof TitreSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/aide': typeof AideRoute
   '/connexion': typeof ConnexionRoute
   '/contact': typeof ContactRoute
@@ -123,6 +137,7 @@ export interface FileRoutesById {
   '/recherche': typeof RechercheRoute
   '/reinitialiser-mot-de-passe': typeof ReinitialiserMotDePasseRoute
   '/tarifs': typeof TarifsRoute
+  '/_authenticated/ma-liste': typeof AuthenticatedMaListeRoute
   '/regarder/$slug': typeof RegarderSlugRoute
   '/titre/$slug': typeof TitreSlugRoute
 }
@@ -139,6 +154,7 @@ export interface FileRouteTypes {
     | '/recherche'
     | '/reinitialiser-mot-de-passe'
     | '/tarifs'
+    | '/ma-liste'
     | '/regarder/$slug'
     | '/titre/$slug'
   fileRoutesByTo: FileRoutesByTo
@@ -153,11 +169,13 @@ export interface FileRouteTypes {
     | '/recherche'
     | '/reinitialiser-mot-de-passe'
     | '/tarifs'
+    | '/ma-liste'
     | '/regarder/$slug'
     | '/titre/$slug'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/aide'
     | '/connexion'
     | '/contact'
@@ -167,12 +185,14 @@ export interface FileRouteTypes {
     | '/recherche'
     | '/reinitialiser-mot-de-passe'
     | '/tarifs'
+    | '/_authenticated/ma-liste'
     | '/regarder/$slug'
     | '/titre/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
   AideRoute: typeof AideRoute
   ConnexionRoute: typeof ConnexionRoute
   ContactRoute: typeof ContactRoute
@@ -251,6 +271,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AideRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -272,11 +299,31 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RegarderSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/ma-liste': {
+      id: '/_authenticated/ma-liste'
+      path: '/ma-liste'
+      fullPath: '/ma-liste'
+      preLoaderRoute: typeof AuthenticatedMaListeRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
   }
 }
 
+interface AuthenticatedRouteChildren {
+  AuthenticatedMaListeRoute: typeof AuthenticatedMaListeRoute
+}
+
+const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
+  AuthenticatedMaListeRoute: AuthenticatedMaListeRoute,
+}
+
+const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
+  AuthenticatedRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRoute: AuthenticatedRouteWithChildren,
   AideRoute: AideRoute,
   ConnexionRoute: ConnexionRoute,
   ContactRoute: ContactRoute,
