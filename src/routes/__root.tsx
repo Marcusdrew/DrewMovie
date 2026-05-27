@@ -121,6 +121,12 @@ function RootComponent() {
       <ThemeProvider>
         <AuthProvider>
           <div className="bg-grain relative min-h-dvh">
+            <a
+              href="#contenu"
+              className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-foreground focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-background"
+            >
+              Aller au contenu principal
+            </a>
             <TopNav />
             <main id="contenu" className="relative z-10">
               <Outlet />
