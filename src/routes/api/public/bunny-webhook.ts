@@ -42,11 +42,13 @@ export const Route = createFileRoute("/api/public/bunny-webhook")({
         else if (status === 2 || status === 3) newStatus = "processing";
 
         if (newStatus) {
-          const patch: Record<string, unknown> = { status: newStatus };
-          if (newStatus === "ready") patch.published_at = new Date().toISOString();
+          const update =
+            newStatus === "ready"
+              ? { status: newStatus, published_at: new Date().toISOString() }
+              : { status: newStatus };
           const { error } = await supabaseAdmin
             .from("content")
-            .update(patch)
+            .update(update)
             .eq("bunny_video_id", guid);
           if (error) {
             console.error("[bunny-webhook] update error:", error.message);
