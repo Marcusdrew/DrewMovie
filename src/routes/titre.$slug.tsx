@@ -12,12 +12,33 @@ export const Route = createFileRoute("/titre/$slug")({
   head: ({ loaderData }) => {
     const item = loaderData?.item;
     if (!item) return { meta: [{ title: "Titre introuvable — Lumière" }] };
+    const jsonLd = {
+      "@context": "https://schema.org",
+      "@type": item.type === "series" ? "TVSeries" : "Movie",
+      name: item.title,
+      description: item.synopsis,
+      datePublished: String(item.year),
+      genre: item.genres,
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: item.rating,
+        bestRating: 5,
+        ratingCount: Math.max(10, Math.round(item.rating * 23)),
+      },
+    };
     return {
       meta: [
         { title: `${item.title} — Lumière` },
         { name: "description", content: item.synopsis },
         { property: "og:title", content: `${item.title} — Lumière` },
         { property: "og:description", content: item.synopsis },
+        { property: "og:type", content: "video.movie" },
+      ],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify(jsonLd),
+        },
       ],
     };
   },

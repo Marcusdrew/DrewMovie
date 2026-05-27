@@ -22,7 +22,7 @@ const NAV = [
 export function TopNav() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const { theme, toggle } = useTheme();
-  const { isAuthenticated, profile, user, signOut } = useAuth();
+  const { isAuthenticated, profile, user, signOut, hasRole } = useAuth();
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -125,6 +125,13 @@ export function TopNav() {
                     <Film className="mr-2 h-4 w-4" /> Mes contenus
                   </Link>
                 </DropdownMenuItem>
+                {hasRole("admin") && (
+                  <DropdownMenuItem asChild>
+                    <Link to="/moderation">
+                      <Film className="mr-2 h-4 w-4" /> Modération
+                    </Link>
+                  </DropdownMenuItem>
+                )}
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onSelect={() => void signOut()}>
                   <LogOut className="mr-2 h-4 w-4" /> Se déconnecter

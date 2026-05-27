@@ -19,6 +19,7 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ConnexionRouteImport } from './routes/connexion'
 import { Route as AideRouteImport } from './routes/aide'
 import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
+import { Route as AdminRouteImport } from './routes/_admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TitreSlugRouteImport } from './routes/titre.$slug'
 import { Route as RegarderSlugRouteImport } from './routes/regarder.$slug'
@@ -27,6 +28,9 @@ import { Route as AuthenticatedProfilRouteImport } from './routes/_authenticated
 import { Route as AuthenticatedMesContenusRouteImport } from './routes/_authenticated/mes-contenus'
 import { Route as AuthenticatedMaListeRouteImport } from './routes/_authenticated/ma-liste'
 import { Route as AuthenticatedHistoriqueRouteImport } from './routes/_authenticated/historique'
+import { Route as AdminModerationRouteImport } from './routes/_admin/moderation'
+import { Route as ApiPublicSitemapDotxmlRouteImport } from './routes/api/public/sitemap[.]xml'
+import { Route as ApiPublicRobotsDottxtRouteImport } from './routes/api/public/robots[.]txt'
 import { Route as ApiPublicBunnyWebhookRouteImport } from './routes/api/public/bunny-webhook'
 
 const TarifsRoute = TarifsRouteImport.update({
@@ -78,6 +82,10 @@ const AuthenticatedRoute = AuthenticatedRouteImport.update({
   id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/_admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -119,6 +127,21 @@ const AuthenticatedHistoriqueRoute = AuthenticatedHistoriqueRouteImport.update({
   path: '/historique',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
+const AdminModerationRoute = AdminModerationRouteImport.update({
+  id: '/moderation',
+  path: '/moderation',
+  getParentRoute: () => AdminRoute,
+} as any)
+const ApiPublicSitemapDotxmlRoute = ApiPublicSitemapDotxmlRouteImport.update({
+  id: '/api/public/sitemap.xml',
+  path: '/api/public/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicRobotsDottxtRoute = ApiPublicRobotsDottxtRouteImport.update({
+  id: '/api/public/robots.txt',
+  path: '/api/public/robots.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicBunnyWebhookRoute = ApiPublicBunnyWebhookRouteImport.update({
   id: '/api/public/bunny-webhook',
   path: '/api/public/bunny-webhook',
@@ -136,6 +159,7 @@ export interface FileRoutesByFullPath {
   '/recherche': typeof RechercheRoute
   '/reinitialiser-mot-de-passe': typeof ReinitialiserMotDePasseRoute
   '/tarifs': typeof TarifsRoute
+  '/moderation': typeof AdminModerationRoute
   '/historique': typeof AuthenticatedHistoriqueRoute
   '/ma-liste': typeof AuthenticatedMaListeRoute
   '/mes-contenus': typeof AuthenticatedMesContenusRoute
@@ -144,6 +168,8 @@ export interface FileRoutesByFullPath {
   '/regarder/$slug': typeof RegarderSlugRoute
   '/titre/$slug': typeof TitreSlugRoute
   '/api/public/bunny-webhook': typeof ApiPublicBunnyWebhookRoute
+  '/api/public/robots.txt': typeof ApiPublicRobotsDottxtRoute
+  '/api/public/sitemap.xml': typeof ApiPublicSitemapDotxmlRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -156,6 +182,7 @@ export interface FileRoutesByTo {
   '/recherche': typeof RechercheRoute
   '/reinitialiser-mot-de-passe': typeof ReinitialiserMotDePasseRoute
   '/tarifs': typeof TarifsRoute
+  '/moderation': typeof AdminModerationRoute
   '/historique': typeof AuthenticatedHistoriqueRoute
   '/ma-liste': typeof AuthenticatedMaListeRoute
   '/mes-contenus': typeof AuthenticatedMesContenusRoute
@@ -164,10 +191,13 @@ export interface FileRoutesByTo {
   '/regarder/$slug': typeof RegarderSlugRoute
   '/titre/$slug': typeof TitreSlugRoute
   '/api/public/bunny-webhook': typeof ApiPublicBunnyWebhookRoute
+  '/api/public/robots.txt': typeof ApiPublicRobotsDottxtRoute
+  '/api/public/sitemap.xml': typeof ApiPublicSitemapDotxmlRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_admin': typeof AdminRouteWithChildren
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/aide': typeof AideRoute
   '/connexion': typeof ConnexionRoute
@@ -178,6 +208,7 @@ export interface FileRoutesById {
   '/recherche': typeof RechercheRoute
   '/reinitialiser-mot-de-passe': typeof ReinitialiserMotDePasseRoute
   '/tarifs': typeof TarifsRoute
+  '/_admin/moderation': typeof AdminModerationRoute
   '/_authenticated/historique': typeof AuthenticatedHistoriqueRoute
   '/_authenticated/ma-liste': typeof AuthenticatedMaListeRoute
   '/_authenticated/mes-contenus': typeof AuthenticatedMesContenusRoute
@@ -186,6 +217,8 @@ export interface FileRoutesById {
   '/regarder/$slug': typeof RegarderSlugRoute
   '/titre/$slug': typeof TitreSlugRoute
   '/api/public/bunny-webhook': typeof ApiPublicBunnyWebhookRoute
+  '/api/public/robots.txt': typeof ApiPublicRobotsDottxtRoute
+  '/api/public/sitemap.xml': typeof ApiPublicSitemapDotxmlRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -200,6 +233,7 @@ export interface FileRouteTypes {
     | '/recherche'
     | '/reinitialiser-mot-de-passe'
     | '/tarifs'
+    | '/moderation'
     | '/historique'
     | '/ma-liste'
     | '/mes-contenus'
@@ -208,6 +242,8 @@ export interface FileRouteTypes {
     | '/regarder/$slug'
     | '/titre/$slug'
     | '/api/public/bunny-webhook'
+    | '/api/public/robots.txt'
+    | '/api/public/sitemap.xml'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -220,6 +256,7 @@ export interface FileRouteTypes {
     | '/recherche'
     | '/reinitialiser-mot-de-passe'
     | '/tarifs'
+    | '/moderation'
     | '/historique'
     | '/ma-liste'
     | '/mes-contenus'
@@ -228,9 +265,12 @@ export interface FileRouteTypes {
     | '/regarder/$slug'
     | '/titre/$slug'
     | '/api/public/bunny-webhook'
+    | '/api/public/robots.txt'
+    | '/api/public/sitemap.xml'
   id:
     | '__root__'
     | '/'
+    | '/_admin'
     | '/_authenticated'
     | '/aide'
     | '/connexion'
@@ -241,6 +281,7 @@ export interface FileRouteTypes {
     | '/recherche'
     | '/reinitialiser-mot-de-passe'
     | '/tarifs'
+    | '/_admin/moderation'
     | '/_authenticated/historique'
     | '/_authenticated/ma-liste'
     | '/_authenticated/mes-contenus'
@@ -249,10 +290,13 @@ export interface FileRouteTypes {
     | '/regarder/$slug'
     | '/titre/$slug'
     | '/api/public/bunny-webhook'
+    | '/api/public/robots.txt'
+    | '/api/public/sitemap.xml'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
   AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
   AideRoute: typeof AideRoute
   ConnexionRoute: typeof ConnexionRoute
@@ -266,6 +310,8 @@ export interface RootRouteChildren {
   RegarderSlugRoute: typeof RegarderSlugRoute
   TitreSlugRoute: typeof TitreSlugRoute
   ApiPublicBunnyWebhookRoute: typeof ApiPublicBunnyWebhookRoute
+  ApiPublicRobotsDottxtRoute: typeof ApiPublicRobotsDottxtRoute
+  ApiPublicSitemapDotxmlRoute: typeof ApiPublicSitemapDotxmlRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -340,6 +386,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_admin': {
+      id: '/_admin'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -396,6 +449,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedHistoriqueRouteImport
       parentRoute: typeof AuthenticatedRoute
     }
+    '/_admin/moderation': {
+      id: '/_admin/moderation'
+      path: '/moderation'
+      fullPath: '/moderation'
+      preLoaderRoute: typeof AdminModerationRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/api/public/sitemap.xml': {
+      id: '/api/public/sitemap.xml'
+      path: '/api/public/sitemap.xml'
+      fullPath: '/api/public/sitemap.xml'
+      preLoaderRoute: typeof ApiPublicSitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/robots.txt': {
+      id: '/api/public/robots.txt'
+      path: '/api/public/robots.txt'
+      fullPath: '/api/public/robots.txt'
+      preLoaderRoute: typeof ApiPublicRobotsDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/bunny-webhook': {
       id: '/api/public/bunny-webhook'
       path: '/api/public/bunny-webhook'
@@ -405,6 +479,16 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface AdminRouteChildren {
+  AdminModerationRoute: typeof AdminModerationRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminModerationRoute: AdminModerationRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 interface AuthenticatedRouteChildren {
   AuthenticatedHistoriqueRoute: typeof AuthenticatedHistoriqueRoute
@@ -428,6 +512,7 @@ const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
   AuthenticatedRoute: AuthenticatedRouteWithChildren,
   AideRoute: AideRoute,
   ConnexionRoute: ConnexionRoute,
@@ -441,6 +526,8 @@ const rootRouteChildren: RootRouteChildren = {
   RegarderSlugRoute: RegarderSlugRoute,
   TitreSlugRoute: TitreSlugRoute,
   ApiPublicBunnyWebhookRoute: ApiPublicBunnyWebhookRoute,
+  ApiPublicRobotsDottxtRoute: ApiPublicRobotsDottxtRoute,
+  ApiPublicSitemapDotxmlRoute: ApiPublicSitemapDotxmlRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
