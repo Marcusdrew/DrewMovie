@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TarifsRouteImport } from './routes/tarifs'
+import { Route as ReinitialiserMotDePasseRouteImport } from './routes/reinitialiser-mot-de-passe'
 import { Route as RechercheRouteImport } from './routes/recherche'
 import { Route as MotDePasseOublieRouteImport } from './routes/mot-de-passe-oublie'
 import { Route as InscriptionRouteImport } from './routes/inscription'
@@ -24,6 +25,11 @@ import { Route as RegarderSlugRouteImport } from './routes/regarder.$slug'
 const TarifsRoute = TarifsRouteImport.update({
   id: '/tarifs',
   path: '/tarifs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReinitialiserMotDePasseRoute = ReinitialiserMotDePasseRouteImport.update({
+  id: '/reinitialiser-mot-de-passe',
+  path: '/reinitialiser-mot-de-passe',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RechercheRoute = RechercheRouteImport.update({
@@ -86,6 +92,7 @@ export interface FileRoutesByFullPath {
   '/inscription': typeof InscriptionRoute
   '/mot-de-passe-oublie': typeof MotDePasseOublieRoute
   '/recherche': typeof RechercheRoute
+  '/reinitialiser-mot-de-passe': typeof ReinitialiserMotDePasseRoute
   '/tarifs': typeof TarifsRoute
   '/regarder/$slug': typeof RegarderSlugRoute
   '/titre/$slug': typeof TitreSlugRoute
@@ -99,6 +106,7 @@ export interface FileRoutesByTo {
   '/inscription': typeof InscriptionRoute
   '/mot-de-passe-oublie': typeof MotDePasseOublieRoute
   '/recherche': typeof RechercheRoute
+  '/reinitialiser-mot-de-passe': typeof ReinitialiserMotDePasseRoute
   '/tarifs': typeof TarifsRoute
   '/regarder/$slug': typeof RegarderSlugRoute
   '/titre/$slug': typeof TitreSlugRoute
@@ -113,6 +121,7 @@ export interface FileRoutesById {
   '/inscription': typeof InscriptionRoute
   '/mot-de-passe-oublie': typeof MotDePasseOublieRoute
   '/recherche': typeof RechercheRoute
+  '/reinitialiser-mot-de-passe': typeof ReinitialiserMotDePasseRoute
   '/tarifs': typeof TarifsRoute
   '/regarder/$slug': typeof RegarderSlugRoute
   '/titre/$slug': typeof TitreSlugRoute
@@ -128,6 +137,7 @@ export interface FileRouteTypes {
     | '/inscription'
     | '/mot-de-passe-oublie'
     | '/recherche'
+    | '/reinitialiser-mot-de-passe'
     | '/tarifs'
     | '/regarder/$slug'
     | '/titre/$slug'
@@ -141,6 +151,7 @@ export interface FileRouteTypes {
     | '/inscription'
     | '/mot-de-passe-oublie'
     | '/recherche'
+    | '/reinitialiser-mot-de-passe'
     | '/tarifs'
     | '/regarder/$slug'
     | '/titre/$slug'
@@ -154,6 +165,7 @@ export interface FileRouteTypes {
     | '/inscription'
     | '/mot-de-passe-oublie'
     | '/recherche'
+    | '/reinitialiser-mot-de-passe'
     | '/tarifs'
     | '/regarder/$slug'
     | '/titre/$slug'
@@ -168,6 +180,7 @@ export interface RootRouteChildren {
   InscriptionRoute: typeof InscriptionRoute
   MotDePasseOublieRoute: typeof MotDePasseOublieRoute
   RechercheRoute: typeof RechercheRoute
+  ReinitialiserMotDePasseRoute: typeof ReinitialiserMotDePasseRoute
   TarifsRoute: typeof TarifsRoute
   RegarderSlugRoute: typeof RegarderSlugRoute
   TitreSlugRoute: typeof TitreSlugRoute
@@ -180,6 +193,13 @@ declare module '@tanstack/react-router' {
       path: '/tarifs'
       fullPath: '/tarifs'
       preLoaderRoute: typeof TarifsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reinitialiser-mot-de-passe': {
+      id: '/reinitialiser-mot-de-passe'
+      path: '/reinitialiser-mot-de-passe'
+      fullPath: '/reinitialiser-mot-de-passe'
+      preLoaderRoute: typeof ReinitialiserMotDePasseRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/recherche': {
@@ -264,6 +284,7 @@ const rootRouteChildren: RootRouteChildren = {
   InscriptionRoute: InscriptionRoute,
   MotDePasseOublieRoute: MotDePasseOublieRoute,
   RechercheRoute: RechercheRoute,
+  ReinitialiserMotDePasseRoute: ReinitialiserMotDePasseRoute,
   TarifsRoute: TarifsRoute,
   RegarderSlugRoute: RegarderSlugRoute,
   TitreSlugRoute: TitreSlugRoute,
