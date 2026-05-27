@@ -59,7 +59,7 @@ export function HLSPlayer({ src, poster, adTagUrl, onProgress }: Props) {
       return;
     }
 
-    let adsManager: { destroy: () => void; init: (w: number, h: number, mode: unknown) => void; start: () => void } | null = null;
+    let adsManager: any = null;
     let cancelled = false;
 
     loadIma()
