@@ -9,6 +9,9 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import { ThemeProvider } from "@/lib/theme";
+import { TopNav } from "@/components/site/top-nav";
+import { SiteFooter } from "@/components/site/footer";
 
 function NotFoundComponent() {
   return (
@@ -72,14 +75,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Lumière — Streaming premium pour créateurs et cinéphiles" },
+      { name: "description", content: "Lumière est la plateforme française de streaming premium : films, séries et animation portés par les créateurs indépendants." },
+      { name: "author", content: "Lumière" },
+      { property: "og:title", content: "Lumière — Streaming premium" },
+      { property: "og:description", content: "Films, séries et animation portés par les créateurs indépendants." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:site", content: "@Lumiere" },
     ],
     links: [
       {
@@ -96,7 +99,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="fr" className="dark" style={{ colorScheme: "dark" }}>
       <head>
         <HeadContent />
       </head>
@@ -113,8 +116,15 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <ThemeProvider>
+        <div className="bg-grain relative min-h-dvh">
+          <TopNav />
+          <main id="contenu" className="relative z-10">
+            <Outlet />
+          </main>
+          <SiteFooter />
+        </div>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }
