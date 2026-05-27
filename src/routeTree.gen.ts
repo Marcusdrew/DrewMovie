@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as TarifsRouteImport } from './routes/tarifs'
 import { Route as RechercheRouteImport } from './routes/recherche'
 import { Route as DecouvrirRouteImport } from './routes/decouvrir'
+import { Route as AideRouteImport } from './routes/aide'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TitreSlugRouteImport } from './routes/titre.$slug'
 
@@ -30,6 +31,11 @@ const DecouvrirRoute = DecouvrirRouteImport.update({
   path: '/decouvrir',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AideRoute = AideRouteImport.update({
+  id: '/aide',
+  path: '/aide',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -43,6 +49,7 @@ const TitreSlugRoute = TitreSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/aide': typeof AideRoute
   '/decouvrir': typeof DecouvrirRoute
   '/recherche': typeof RechercheRoute
   '/tarifs': typeof TarifsRoute
@@ -50,6 +57,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/aide': typeof AideRoute
   '/decouvrir': typeof DecouvrirRoute
   '/recherche': typeof RechercheRoute
   '/tarifs': typeof TarifsRoute
@@ -58,6 +66,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/aide': typeof AideRoute
   '/decouvrir': typeof DecouvrirRoute
   '/recherche': typeof RechercheRoute
   '/tarifs': typeof TarifsRoute
@@ -65,12 +74,19 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/decouvrir' | '/recherche' | '/tarifs' | '/titre/$slug'
+  fullPaths:
+    | '/'
+    | '/aide'
+    | '/decouvrir'
+    | '/recherche'
+    | '/tarifs'
+    | '/titre/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/decouvrir' | '/recherche' | '/tarifs' | '/titre/$slug'
+  to: '/' | '/aide' | '/decouvrir' | '/recherche' | '/tarifs' | '/titre/$slug'
   id:
     | '__root__'
     | '/'
+    | '/aide'
     | '/decouvrir'
     | '/recherche'
     | '/tarifs'
@@ -79,6 +95,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AideRoute: typeof AideRoute
   DecouvrirRoute: typeof DecouvrirRoute
   RechercheRoute: typeof RechercheRoute
   TarifsRoute: typeof TarifsRoute
@@ -108,6 +125,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DecouvrirRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/aide': {
+      id: '/aide'
+      path: '/aide'
+      fullPath: '/aide'
+      preLoaderRoute: typeof AideRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -127,6 +151,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AideRoute: AideRoute,
   DecouvrirRoute: DecouvrirRoute,
   RechercheRoute: RechercheRoute,
   TarifsRoute: TarifsRoute,
