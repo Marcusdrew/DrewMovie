@@ -9,9 +9,15 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as RechercheRouteImport } from './routes/recherche'
 import { Route as DecouvrirRouteImport } from './routes/decouvrir'
 import { Route as IndexRouteImport } from './routes/index'
 
+const RechercheRoute = RechercheRouteImport.update({
+  id: '/recherche',
+  path: '/recherche',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DecouvrirRoute = DecouvrirRouteImport.update({
   id: '/decouvrir',
   path: '/decouvrir',
@@ -26,31 +32,42 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/decouvrir': typeof DecouvrirRoute
+  '/recherche': typeof RechercheRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/decouvrir': typeof DecouvrirRoute
+  '/recherche': typeof RechercheRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/decouvrir': typeof DecouvrirRoute
+  '/recherche': typeof RechercheRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/decouvrir'
+  fullPaths: '/' | '/decouvrir' | '/recherche'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/decouvrir'
-  id: '__root__' | '/' | '/decouvrir'
+  to: '/' | '/decouvrir' | '/recherche'
+  id: '__root__' | '/' | '/decouvrir' | '/recherche'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DecouvrirRoute: typeof DecouvrirRoute
+  RechercheRoute: typeof RechercheRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/recherche': {
+      id: '/recherche'
+      path: '/recherche'
+      fullPath: '/recherche'
+      preLoaderRoute: typeof RechercheRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/decouvrir': {
       id: '/decouvrir'
       path: '/decouvrir'
@@ -71,6 +88,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DecouvrirRoute: DecouvrirRoute,
+  RechercheRoute: RechercheRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
