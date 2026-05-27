@@ -22,6 +22,7 @@ import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TitreSlugRouteImport } from './routes/titre.$slug'
 import { Route as RegarderSlugRouteImport } from './routes/regarder.$slug'
+import { Route as AuthenticatedTeleverserRouteImport } from './routes/_authenticated/televerser'
 import { Route as AuthenticatedProfilRouteImport } from './routes/_authenticated/profil'
 import { Route as AuthenticatedMaListeRouteImport } from './routes/_authenticated/ma-liste'
 import { Route as AuthenticatedHistoriqueRouteImport } from './routes/_authenticated/historique'
@@ -91,6 +92,11 @@ const RegarderSlugRoute = RegarderSlugRouteImport.update({
   path: '/regarder/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedTeleverserRoute = AuthenticatedTeleverserRouteImport.update({
+  id: '/televerser',
+  path: '/televerser',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 const AuthenticatedProfilRoute = AuthenticatedProfilRouteImport.update({
   id: '/profil',
   path: '/profil',
@@ -126,6 +132,7 @@ export interface FileRoutesByFullPath {
   '/historique': typeof AuthenticatedHistoriqueRoute
   '/ma-liste': typeof AuthenticatedMaListeRoute
   '/profil': typeof AuthenticatedProfilRoute
+  '/televerser': typeof AuthenticatedTeleverserRoute
   '/regarder/$slug': typeof RegarderSlugRoute
   '/titre/$slug': typeof TitreSlugRoute
   '/api/public/bunny-webhook': typeof ApiPublicBunnyWebhookRoute
@@ -144,6 +151,7 @@ export interface FileRoutesByTo {
   '/historique': typeof AuthenticatedHistoriqueRoute
   '/ma-liste': typeof AuthenticatedMaListeRoute
   '/profil': typeof AuthenticatedProfilRoute
+  '/televerser': typeof AuthenticatedTeleverserRoute
   '/regarder/$slug': typeof RegarderSlugRoute
   '/titre/$slug': typeof TitreSlugRoute
   '/api/public/bunny-webhook': typeof ApiPublicBunnyWebhookRoute
@@ -164,6 +172,7 @@ export interface FileRoutesById {
   '/_authenticated/historique': typeof AuthenticatedHistoriqueRoute
   '/_authenticated/ma-liste': typeof AuthenticatedMaListeRoute
   '/_authenticated/profil': typeof AuthenticatedProfilRoute
+  '/_authenticated/televerser': typeof AuthenticatedTeleverserRoute
   '/regarder/$slug': typeof RegarderSlugRoute
   '/titre/$slug': typeof TitreSlugRoute
   '/api/public/bunny-webhook': typeof ApiPublicBunnyWebhookRoute
@@ -184,6 +193,7 @@ export interface FileRouteTypes {
     | '/historique'
     | '/ma-liste'
     | '/profil'
+    | '/televerser'
     | '/regarder/$slug'
     | '/titre/$slug'
     | '/api/public/bunny-webhook'
@@ -202,6 +212,7 @@ export interface FileRouteTypes {
     | '/historique'
     | '/ma-liste'
     | '/profil'
+    | '/televerser'
     | '/regarder/$slug'
     | '/titre/$slug'
     | '/api/public/bunny-webhook'
@@ -221,6 +232,7 @@ export interface FileRouteTypes {
     | '/_authenticated/historique'
     | '/_authenticated/ma-liste'
     | '/_authenticated/profil'
+    | '/_authenticated/televerser'
     | '/regarder/$slug'
     | '/titre/$slug'
     | '/api/public/bunny-webhook'
@@ -336,6 +348,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RegarderSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/televerser': {
+      id: '/_authenticated/televerser'
+      path: '/televerser'
+      fullPath: '/televerser'
+      preLoaderRoute: typeof AuthenticatedTeleverserRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
     '/_authenticated/profil': {
       id: '/_authenticated/profil'
       path: '/profil'
@@ -371,12 +390,14 @@ interface AuthenticatedRouteChildren {
   AuthenticatedHistoriqueRoute: typeof AuthenticatedHistoriqueRoute
   AuthenticatedMaListeRoute: typeof AuthenticatedMaListeRoute
   AuthenticatedProfilRoute: typeof AuthenticatedProfilRoute
+  AuthenticatedTeleverserRoute: typeof AuthenticatedTeleverserRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedHistoriqueRoute: AuthenticatedHistoriqueRoute,
   AuthenticatedMaListeRoute: AuthenticatedMaListeRoute,
   AuthenticatedProfilRoute: AuthenticatedProfilRoute,
+  AuthenticatedTeleverserRoute: AuthenticatedTeleverserRoute,
 }
 
 const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
