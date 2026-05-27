@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TarifsRouteImport } from './routes/tarifs'
 import { Route as RechercheRouteImport } from './routes/recherche'
+import { Route as MotDePasseOublieRouteImport } from './routes/mot-de-passe-oublie'
 import { Route as InscriptionRouteImport } from './routes/inscription'
 import { Route as DecouvrirRouteImport } from './routes/decouvrir'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -28,6 +29,11 @@ const TarifsRoute = TarifsRouteImport.update({
 const RechercheRoute = RechercheRouteImport.update({
   id: '/recherche',
   path: '/recherche',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MotDePasseOublieRoute = MotDePasseOublieRouteImport.update({
+  id: '/mot-de-passe-oublie',
+  path: '/mot-de-passe-oublie',
   getParentRoute: () => rootRouteImport,
 } as any)
 const InscriptionRoute = InscriptionRouteImport.update({
@@ -78,6 +84,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/decouvrir': typeof DecouvrirRoute
   '/inscription': typeof InscriptionRoute
+  '/mot-de-passe-oublie': typeof MotDePasseOublieRoute
   '/recherche': typeof RechercheRoute
   '/tarifs': typeof TarifsRoute
   '/regarder/$slug': typeof RegarderSlugRoute
@@ -90,6 +97,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/decouvrir': typeof DecouvrirRoute
   '/inscription': typeof InscriptionRoute
+  '/mot-de-passe-oublie': typeof MotDePasseOublieRoute
   '/recherche': typeof RechercheRoute
   '/tarifs': typeof TarifsRoute
   '/regarder/$slug': typeof RegarderSlugRoute
@@ -103,6 +111,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/decouvrir': typeof DecouvrirRoute
   '/inscription': typeof InscriptionRoute
+  '/mot-de-passe-oublie': typeof MotDePasseOublieRoute
   '/recherche': typeof RechercheRoute
   '/tarifs': typeof TarifsRoute
   '/regarder/$slug': typeof RegarderSlugRoute
@@ -117,6 +126,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/decouvrir'
     | '/inscription'
+    | '/mot-de-passe-oublie'
     | '/recherche'
     | '/tarifs'
     | '/regarder/$slug'
@@ -129,6 +139,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/decouvrir'
     | '/inscription'
+    | '/mot-de-passe-oublie'
     | '/recherche'
     | '/tarifs'
     | '/regarder/$slug'
@@ -141,6 +152,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/decouvrir'
     | '/inscription'
+    | '/mot-de-passe-oublie'
     | '/recherche'
     | '/tarifs'
     | '/regarder/$slug'
@@ -154,6 +166,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   DecouvrirRoute: typeof DecouvrirRoute
   InscriptionRoute: typeof InscriptionRoute
+  MotDePasseOublieRoute: typeof MotDePasseOublieRoute
   RechercheRoute: typeof RechercheRoute
   TarifsRoute: typeof TarifsRoute
   RegarderSlugRoute: typeof RegarderSlugRoute
@@ -174,6 +187,13 @@ declare module '@tanstack/react-router' {
       path: '/recherche'
       fullPath: '/recherche'
       preLoaderRoute: typeof RechercheRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mot-de-passe-oublie': {
+      id: '/mot-de-passe-oublie'
+      path: '/mot-de-passe-oublie'
+      fullPath: '/mot-de-passe-oublie'
+      preLoaderRoute: typeof MotDePasseOublieRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/inscription': {
@@ -242,6 +262,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   DecouvrirRoute: DecouvrirRoute,
   InscriptionRoute: InscriptionRoute,
+  MotDePasseOublieRoute: MotDePasseOublieRoute,
   RechercheRoute: RechercheRoute,
   TarifsRoute: TarifsRoute,
   RegarderSlugRoute: RegarderSlugRoute,
