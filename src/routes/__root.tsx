@@ -10,8 +10,10 @@ import {
 
 import appCss from "../styles.css?url";
 import { ThemeProvider } from "@/lib/theme";
+import { AuthProvider } from "@/lib/auth";
 import { TopNav } from "@/components/site/top-nav";
 import { SiteFooter } from "@/components/site/footer";
+import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
   return (
@@ -117,13 +119,16 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
-        <div className="bg-grain relative min-h-dvh">
-          <TopNav />
-          <main id="contenu" className="relative z-10">
-            <Outlet />
-          </main>
-          <SiteFooter />
-        </div>
+        <AuthProvider>
+          <div className="bg-grain relative min-h-dvh">
+            <TopNav />
+            <main id="contenu" className="relative z-10">
+              <Outlet />
+            </main>
+            <SiteFooter />
+            <Toaster />
+          </div>
+        </AuthProvider>
       </ThemeProvider>
     </QueryClientProvider>
   );

@@ -1,8 +1,16 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Search, Sun, Moon, User } from "lucide-react";
+import { Search, Sun, Moon, User, LogOut, ListVideo, History } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useTheme } from "@/lib/theme";
+import { useAuth } from "@/lib/auth";
 import { cn } from "@/lib/utils";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const NAV = [
   { to: "/", label: "Accueil" },
@@ -14,6 +22,7 @@ const NAV = [
 export function TopNav() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const { theme, toggle } = useTheme();
+  const { isAuthenticated, profile, user, signOut } = useAuth();
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -77,13 +86,49 @@ export function TopNav() {
           >
             {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
           </button>
-          <Link
-            to="/connexion"
-            className="hidden h-9 items-center gap-2 rounded-full border border-glass-border bg-glass px-4 text-sm font-medium text-foreground transition-colors hover:bg-secondary sm:inline-flex"
-          >
-            <User className="h-3.5 w-3.5" />
-            Se connecter
-          </Link>
+          {isAuthenticated ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger
+                aria-label="Mon compte"
+                className="grid h-9 w-9 place-items-center rounded-full bg-foreground text-xs font-semibold text-background"
+              >
+                {(profile?.display_name?.[0] ?? user?.email?.[0] ?? "?").toUpperCase()}
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56">
+                <div className="px-2 py-1.5 text-xs text-muted-foreground">
+                  {profile?.display_name ?? user?.email}
+                </div>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link to="/ma-liste">
+                    <ListVideo className="mr-2 h-4 w-4" /> Ma liste
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/historique">
+                    <History className="mr-2 h-4 w-4" /> Historique
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/profil">
+                    <User className="mr-2 h-4 w-4" /> Mon profil
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onSelect={() => void signOut()}>
+                  <LogOut className="mr-2 h-4 w-4" /> Se déconnecter
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <Link
+              to="/connexion"
+              className="hidden h-9 items-center gap-2 rounded-full border border-glass-border bg-glass px-4 text-sm font-medium text-foreground transition-colors hover:bg-secondary sm:inline-flex"
+            >
+              <User className="h-3.5 w-3.5" />
+              Se connecter
+            </Link>
+          )}
         </div>
       </div>
     </header>

@@ -10,24 +10,40 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TarifsRouteImport } from './routes/tarifs'
+import { Route as ReinitialiserMotDePasseRouteImport } from './routes/reinitialiser-mot-de-passe'
 import { Route as RechercheRouteImport } from './routes/recherche'
+import { Route as MotDePasseOublieRouteImport } from './routes/mot-de-passe-oublie'
 import { Route as InscriptionRouteImport } from './routes/inscription'
 import { Route as DecouvrirRouteImport } from './routes/decouvrir'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ConnexionRouteImport } from './routes/connexion'
 import { Route as AideRouteImport } from './routes/aide'
+import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TitreSlugRouteImport } from './routes/titre.$slug'
 import { Route as RegarderSlugRouteImport } from './routes/regarder.$slug'
+import { Route as AuthenticatedProfilRouteImport } from './routes/_authenticated/profil'
+import { Route as AuthenticatedMaListeRouteImport } from './routes/_authenticated/ma-liste'
+import { Route as AuthenticatedHistoriqueRouteImport } from './routes/_authenticated/historique'
 
 const TarifsRoute = TarifsRouteImport.update({
   id: '/tarifs',
   path: '/tarifs',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ReinitialiserMotDePasseRoute = ReinitialiserMotDePasseRouteImport.update({
+  id: '/reinitialiser-mot-de-passe',
+  path: '/reinitialiser-mot-de-passe',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RechercheRoute = RechercheRouteImport.update({
   id: '/recherche',
   path: '/recherche',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MotDePasseOublieRoute = MotDePasseOublieRouteImport.update({
+  id: '/mot-de-passe-oublie',
+  path: '/mot-de-passe-oublie',
   getParentRoute: () => rootRouteImport,
 } as any)
 const InscriptionRoute = InscriptionRouteImport.update({
@@ -55,6 +71,10 @@ const AideRoute = AideRouteImport.update({
   path: '/aide',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRoute = AuthenticatedRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -70,6 +90,21 @@ const RegarderSlugRoute = RegarderSlugRouteImport.update({
   path: '/regarder/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedProfilRoute = AuthenticatedProfilRouteImport.update({
+  id: '/profil',
+  path: '/profil',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedMaListeRoute = AuthenticatedMaListeRouteImport.update({
+  id: '/ma-liste',
+  path: '/ma-liste',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedHistoriqueRoute = AuthenticatedHistoriqueRouteImport.update({
+  id: '/historique',
+  path: '/historique',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -78,8 +113,13 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/decouvrir': typeof DecouvrirRoute
   '/inscription': typeof InscriptionRoute
+  '/mot-de-passe-oublie': typeof MotDePasseOublieRoute
   '/recherche': typeof RechercheRoute
+  '/reinitialiser-mot-de-passe': typeof ReinitialiserMotDePasseRoute
   '/tarifs': typeof TarifsRoute
+  '/historique': typeof AuthenticatedHistoriqueRoute
+  '/ma-liste': typeof AuthenticatedMaListeRoute
+  '/profil': typeof AuthenticatedProfilRoute
   '/regarder/$slug': typeof RegarderSlugRoute
   '/titre/$slug': typeof TitreSlugRoute
 }
@@ -90,21 +130,32 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/decouvrir': typeof DecouvrirRoute
   '/inscription': typeof InscriptionRoute
+  '/mot-de-passe-oublie': typeof MotDePasseOublieRoute
   '/recherche': typeof RechercheRoute
+  '/reinitialiser-mot-de-passe': typeof ReinitialiserMotDePasseRoute
   '/tarifs': typeof TarifsRoute
+  '/historique': typeof AuthenticatedHistoriqueRoute
+  '/ma-liste': typeof AuthenticatedMaListeRoute
+  '/profil': typeof AuthenticatedProfilRoute
   '/regarder/$slug': typeof RegarderSlugRoute
   '/titre/$slug': typeof TitreSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/aide': typeof AideRoute
   '/connexion': typeof ConnexionRoute
   '/contact': typeof ContactRoute
   '/decouvrir': typeof DecouvrirRoute
   '/inscription': typeof InscriptionRoute
+  '/mot-de-passe-oublie': typeof MotDePasseOublieRoute
   '/recherche': typeof RechercheRoute
+  '/reinitialiser-mot-de-passe': typeof ReinitialiserMotDePasseRoute
   '/tarifs': typeof TarifsRoute
+  '/_authenticated/historique': typeof AuthenticatedHistoriqueRoute
+  '/_authenticated/ma-liste': typeof AuthenticatedMaListeRoute
+  '/_authenticated/profil': typeof AuthenticatedProfilRoute
   '/regarder/$slug': typeof RegarderSlugRoute
   '/titre/$slug': typeof TitreSlugRoute
 }
@@ -117,8 +168,13 @@ export interface FileRouteTypes {
     | '/contact'
     | '/decouvrir'
     | '/inscription'
+    | '/mot-de-passe-oublie'
     | '/recherche'
+    | '/reinitialiser-mot-de-passe'
     | '/tarifs'
+    | '/historique'
+    | '/ma-liste'
+    | '/profil'
     | '/regarder/$slug'
     | '/titre/$slug'
   fileRoutesByTo: FileRoutesByTo
@@ -129,32 +185,46 @@ export interface FileRouteTypes {
     | '/contact'
     | '/decouvrir'
     | '/inscription'
+    | '/mot-de-passe-oublie'
     | '/recherche'
+    | '/reinitialiser-mot-de-passe'
     | '/tarifs'
+    | '/historique'
+    | '/ma-liste'
+    | '/profil'
     | '/regarder/$slug'
     | '/titre/$slug'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/aide'
     | '/connexion'
     | '/contact'
     | '/decouvrir'
     | '/inscription'
+    | '/mot-de-passe-oublie'
     | '/recherche'
+    | '/reinitialiser-mot-de-passe'
     | '/tarifs'
+    | '/_authenticated/historique'
+    | '/_authenticated/ma-liste'
+    | '/_authenticated/profil'
     | '/regarder/$slug'
     | '/titre/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
   AideRoute: typeof AideRoute
   ConnexionRoute: typeof ConnexionRoute
   ContactRoute: typeof ContactRoute
   DecouvrirRoute: typeof DecouvrirRoute
   InscriptionRoute: typeof InscriptionRoute
+  MotDePasseOublieRoute: typeof MotDePasseOublieRoute
   RechercheRoute: typeof RechercheRoute
+  ReinitialiserMotDePasseRoute: typeof ReinitialiserMotDePasseRoute
   TarifsRoute: typeof TarifsRoute
   RegarderSlugRoute: typeof RegarderSlugRoute
   TitreSlugRoute: typeof TitreSlugRoute
@@ -169,11 +239,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TarifsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/reinitialiser-mot-de-passe': {
+      id: '/reinitialiser-mot-de-passe'
+      path: '/reinitialiser-mot-de-passe'
+      fullPath: '/reinitialiser-mot-de-passe'
+      preLoaderRoute: typeof ReinitialiserMotDePasseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/recherche': {
       id: '/recherche'
       path: '/recherche'
       fullPath: '/recherche'
       preLoaderRoute: typeof RechercheRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mot-de-passe-oublie': {
+      id: '/mot-de-passe-oublie'
+      path: '/mot-de-passe-oublie'
+      fullPath: '/mot-de-passe-oublie'
+      preLoaderRoute: typeof MotDePasseOublieRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/inscription': {
@@ -211,6 +295,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AideRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -232,17 +323,57 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RegarderSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/profil': {
+      id: '/_authenticated/profil'
+      path: '/profil'
+      fullPath: '/profil'
+      preLoaderRoute: typeof AuthenticatedProfilRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/ma-liste': {
+      id: '/_authenticated/ma-liste'
+      path: '/ma-liste'
+      fullPath: '/ma-liste'
+      preLoaderRoute: typeof AuthenticatedMaListeRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/historique': {
+      id: '/_authenticated/historique'
+      path: '/historique'
+      fullPath: '/historique'
+      preLoaderRoute: typeof AuthenticatedHistoriqueRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
   }
 }
 
+interface AuthenticatedRouteChildren {
+  AuthenticatedHistoriqueRoute: typeof AuthenticatedHistoriqueRoute
+  AuthenticatedMaListeRoute: typeof AuthenticatedMaListeRoute
+  AuthenticatedProfilRoute: typeof AuthenticatedProfilRoute
+}
+
+const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
+  AuthenticatedHistoriqueRoute: AuthenticatedHistoriqueRoute,
+  AuthenticatedMaListeRoute: AuthenticatedMaListeRoute,
+  AuthenticatedProfilRoute: AuthenticatedProfilRoute,
+}
+
+const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
+  AuthenticatedRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRoute: AuthenticatedRouteWithChildren,
   AideRoute: AideRoute,
   ConnexionRoute: ConnexionRoute,
   ContactRoute: ContactRoute,
   DecouvrirRoute: DecouvrirRoute,
   InscriptionRoute: InscriptionRoute,
+  MotDePasseOublieRoute: MotDePasseOublieRoute,
   RechercheRoute: RechercheRoute,
+  ReinitialiserMotDePasseRoute: ReinitialiserMotDePasseRoute,
   TarifsRoute: TarifsRoute,
   RegarderSlugRoute: RegarderSlugRoute,
   TitreSlugRoute: TitreSlugRoute,
