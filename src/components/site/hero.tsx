@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Play, Info, Star } from "lucide-react";
 import { motion } from "motion/react";
 import type { MockContent } from "@/lib/mock-catalog";
+import { FavoriteButton } from "@/components/site/favorite-button";
 
 export function Hero({ item }: { item: MockContent }) {
   return (
@@ -70,6 +71,7 @@ export function Hero({ item }: { item: MockContent }) {
               <Info className="h-4 w-4" />
               Plus d'infos
             </Link>
+            <FavoriteButton slug={item.slug} title={item.title} size="lg" />
           </div>
         </motion.div>
       </div>
