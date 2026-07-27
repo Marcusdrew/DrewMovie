@@ -11,6 +11,7 @@ import {
 import appCss from "../styles.css?url";
 import { ThemeProvider } from "@/lib/theme";
 import { AuthProvider } from "@/lib/auth";
+import { FavoritesProvider } from "@/lib/favorites";
 import { TopNav } from "@/components/site/top-nav";
 import { SiteFooter } from "@/components/site/footer";
 import { Toaster } from "@/components/ui/sonner";
@@ -120,6 +121,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <AuthProvider>
+          <FavoritesProvider>
           <div className="bg-grain relative min-h-dvh">
             <a
               href="#contenu"
@@ -134,6 +136,7 @@ function RootComponent() {
             <SiteFooter />
             <Toaster />
           </div>
+          </FavoritesProvider>
         </AuthProvider>
       </ThemeProvider>
     </QueryClientProvider>

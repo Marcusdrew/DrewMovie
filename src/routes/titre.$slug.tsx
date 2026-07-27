@@ -1,6 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { Play, Plus, Share2, Star } from "lucide-react";
+import { Play, Share2, Star } from "lucide-react";
 import { ContentCard } from "@/components/site/content-card";
+import { FavoriteButton } from "@/components/site/favorite-button";
 import { findBySlug, MOCK_CATALOG } from "@/lib/mock-catalog";
 
 export const Route = createFileRoute("/titre/$slug")({
@@ -100,13 +101,7 @@ function TitrePage() {
                 <Play className="h-4 w-4 fill-current" />
                 Lecture
               </Link>
-              <button
-                type="button"
-                className="inline-flex h-12 items-center gap-2 rounded-full border border-glass-border bg-glass px-5 text-sm font-medium text-foreground"
-              >
-                <Plus className="h-4 w-4" />
-                Ma liste
-              </button>
+              <FavoriteButton slug={item.slug} title={item.title} size="lg" withLabel />
               <button
                 type="button"
                 aria-label="Partager"

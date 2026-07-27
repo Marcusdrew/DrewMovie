@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
-import { Play, Plus, Star } from "lucide-react";
+import { Play, Star } from "lucide-react";
 import type { MockContent } from "@/lib/mock-catalog";
+import { FavoriteButton } from "@/components/site/favorite-button";
 
 const TYPE_LABEL: Record<MockContent["type"], string> = {
   movie: "Film",
@@ -21,6 +22,11 @@ export function ContentCard({ item, size = "md" }: { item: MockContent; size?: "
         className={`${aspect} w-full relative overflow-hidden rounded-xl ring-1 ring-glass-border transition-transform duration-500 group-hover:scale-[1.03]`}
         style={{ background: item.poster }}
       >
+        {/* Coup de cœur */}
+        <div className="absolute right-2 top-2 z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100 focus-within:opacity-100">
+          <FavoriteButton slug={item.slug} title={item.title} size="sm" />
+        </div>
+
         {/* Title overlay */}
         <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/85 via-black/30 to-transparent p-4">
           <span className="text-[10px] font-medium uppercase tracking-wider text-white/70">
@@ -43,12 +49,6 @@ export function ContentCard({ item, size = "md" }: { item: MockContent; size?: "
           <div className="flex items-center gap-2 pt-1">
             <span className="inline-flex h-8 items-center gap-1.5 rounded-full bg-white px-3 text-xs font-semibold text-black">
               <Play className="h-3 w-3 fill-current" /> Lecture
-            </span>
-            <span
-              className="grid h-8 w-8 place-items-center rounded-full border border-white/40 text-white"
-              aria-label="Ajouter à ma liste"
-            >
-              <Plus className="h-3.5 w-3.5" />
             </span>
           </div>
         </div>

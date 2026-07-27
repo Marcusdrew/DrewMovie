@@ -4,6 +4,9 @@ import { Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth";
+import { useFavorites } from "@/lib/favorites";
+import { MOCK_CATALOG } from "@/lib/mock-catalog";
+import { ContentCard } from "@/components/site/content-card";
 
 export const Route = createFileRoute("/_authenticated/ma-liste")({
   head: () => ({
@@ -15,6 +18,12 @@ export const Route = createFileRoute("/_authenticated/ma-liste")({
 function MyList() {
   const { user } = useAuth();
   const queryClient = useQueryClient();
+  const { favorites, ready } = useFavorites();
+  const favoriteItems = ready
+    ? favorites
+        .map((slug) => MOCK_CATALOG.find((c) => c.slug === slug))
+        .filter((c): c is (typeof MOCK_CATALOG)[number] => Boolean(c))
+    : [];
 
   const { data, isLoading } = useQuery({
     queryKey: ["watchlist", user?.id],
@@ -52,6 +61,28 @@ function MyList() {
           Vos titres mis de côté pour plus tard.
         </p>
       </header>
+
+      <section className="mb-14">
+        <div className="mb-5 flex items-baseline justify-between gap-4">
+          <h2 className="font-display text-2xl font-semibold tracking-tight">Coups de cœur</h2>
+          <span className="text-xs text-muted-foreground">
+            {favoriteItems.length} titre{favoriteItems.length > 1 ? "s" : ""}
+          </span>
+        </div>
+        {favoriteItems.length === 0 ? (
+          <div className="rounded-2xl border border-glass-border bg-glass p-10 text-center">
+            <p className="text-sm text-muted-foreground">
+              Aucun coup de cœur pour l'instant. Touchez le cœur sur un titre pour le retrouver ici.
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+            {favoriteItems.map((c) => (
+              <ContentCard key={c.slug} item={c} />
+            ))}
+          </div>
+        )}
+      </section>
 
       {isLoading ? (
         <p className="text-sm text-muted-foreground">Chargement…</p>
