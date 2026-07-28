@@ -54,21 +54,27 @@ function TitrePage() {
     <div>
       {/* Cinematic backdrop */}
       <section className="relative isolate -mt-16 flex min-h-[70vh] items-end overflow-hidden pt-32">
-        <div
-          aria-hidden
-          className="absolute inset-0 -z-10"
-          style={{
-            background: `radial-gradient(70% 90% at 60% 30%, oklch(0.55 0.25 ${item.backdropHue} / 0.7), transparent 70%), linear-gradient(180deg, oklch(0.18 0.05 ${item.backdropHue}) 0%, var(--background) 95%)`,
-          }}
-        />
+        <div aria-hidden className="absolute inset-0 -z-10 overflow-hidden">
+          <img
+            src={item.backdrop ?? item.image}
+            alt=""
+            className="h-full w-full scale-105 object-cover object-center blur-[2px]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/75 to-background/40" />
+        </div>
         <div className="aurora -z-10" aria-hidden />
 
         <div className="mx-auto grid w-full max-w-7xl gap-10 px-4 pb-16 sm:px-6 md:grid-cols-[260px_1fr] lg:px-8">
           {/* Poster */}
-          <div
-            className="aspect-[2/3] w-full max-w-[260px] overflow-hidden rounded-2xl ring-1 ring-glass-border shadow-[0_30px_80px_-30px_rgba(0,0,0,0.7)]"
-            style={{ background: item.poster }}
-          />
+          <div className="aspect-[2/3] w-full max-w-[260px] overflow-hidden rounded-2xl ring-1 ring-glass-border shadow-[0_30px_80px_-30px_rgba(0,0,0,0.7)]">
+            <img
+              src={item.image}
+              alt={`Affiche de ${item.title}`}
+              width={640}
+              height={960}
+              className="h-full w-full object-cover"
+            />
+          </div>
 
           <div>
             <span className="inline-flex items-center gap-2 rounded-full border border-glass-border bg-glass px-3 py-1 text-xs font-medium uppercase tracking-wider text-foreground/80">
