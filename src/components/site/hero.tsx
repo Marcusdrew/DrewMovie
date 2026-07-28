@@ -8,13 +8,19 @@ export function Hero({ item }: { item: MockContent }) {
   return (
     <section className="relative isolate -mt-16 flex min-h-[88vh] items-end overflow-hidden pb-20 pt-32">
       {/* Backdrop */}
-      <div
-        aria-hidden
-        className="absolute inset-0 -z-10"
-        style={{
-          background: `radial-gradient(60% 80% at 70% 30%, oklch(0.3 0 0 / 0.8), transparent 70%), linear-gradient(180deg, oklch(0.18 0 0) 0%, var(--background) 90%)`,
-        }}
-      />
+      <div aria-hidden className="absolute inset-0 -z-10 overflow-hidden">
+        {(item.backdrop ?? item.image) && (
+          <img
+            src={item.backdrop ?? item.image}
+            alt=""
+            width={1600}
+            height={900}
+            className="h-full w-full object-cover object-center"
+          />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-background/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-background/70" />
+      </div>
       <div className="aurora -z-10" aria-hidden />
 
       <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
