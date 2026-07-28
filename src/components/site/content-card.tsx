@@ -22,6 +22,12 @@ export function ContentCard({ item, size = "md" }: { item: MockContent; size?: "
         className={`${aspect} w-full relative overflow-hidden rounded-xl ring-1 ring-glass-border transition-transform duration-500 group-hover:scale-[1.03]`}
         style={{ background: item.poster }}
       >
+        <img
+          src={size === "lg" && item.backdrop ? item.backdrop : item.image}
+          alt={`Affiche de ${item.title}`}
+          loading="lazy"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
         {/* Coup de cœur */}
         <div className="absolute right-2 top-2 z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100 focus-within:opacity-100">
           <FavoriteButton slug={item.slug} title={item.title} size="sm" />

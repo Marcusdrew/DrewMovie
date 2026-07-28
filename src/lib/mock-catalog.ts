@@ -1,3 +1,17 @@
+import pEchos from "@/assets/posters/echos-de-lumiere.jpg";
+import pDerniereSaison from "@/assets/posters/la-derniere-saison.jpg";
+import pKintsugi from "@/assets/posters/kintsugi.jpg";
+import pHorizonNord from "@/assets/posters/horizon-nord.jpg";
+import pVerreBrise from "@/assets/posters/verre-brise.jpg";
+import pSaisonsRouges from "@/assets/posters/saisons-rouges.jpg";
+import pProtocole from "@/assets/posters/le-protocole.jpg";
+import pMareesBasses from "@/assets/posters/marees-basses.jpg";
+import pNeonPluie from "@/assets/posters/neon-pluie.jpg";
+import pMecanique from "@/assets/posters/la-mecanique-des-reves.jpg";
+import pCielCendres from "@/assets/posters/ciel-de-cendres.jpg";
+import pJardins from "@/assets/posters/les-jardins-suspendus.jpg";
+import bEchos from "@/assets/backdrops/echos-de-lumiere.jpg";
+
 export type ContentType = "movie" | "series" | "anime";
 
 export interface MockContent {
@@ -11,6 +25,8 @@ export interface MockContent {
   tagline: string;
   rating: number;
   poster: string; // gradient seed for placeholder
+  image: string; // affiche 2:3
+  backdrop?: string; // visuel large 16:9
   backdropHue: number;
 }
 
@@ -36,6 +52,8 @@ export const MOCK_CATALOG: MockContent[] = [
     tagline: "La lumière n'oublie rien.",
     rating: 4.7,
     poster: poster(1),
+    image: pEchos,
+    backdrop: bEchos,
     backdropHue: 280,
   },
   {
@@ -50,6 +68,7 @@ export const MOCK_CATALOG: MockContent[] = [
     tagline: "Personne ne revient indemne.",
     rating: 4.5,
     poster: poster(2),
+    image: pDerniereSaison,
     backdropHue: 320,
   },
   {
@@ -64,6 +83,7 @@ export const MOCK_CATALOG: MockContent[] = [
     tagline: "Ce qui est brisé peut briller plus fort.",
     rating: 4.8,
     poster: poster(3),
+    image: pKintsugi,
     backdropHue: 40,
   },
   {
@@ -77,6 +97,7 @@ export const MOCK_CATALOG: MockContent[] = [
     tagline: "Le monde finit là où le silence commence.",
     rating: 4.3,
     poster: poster(4),
+    image: pHorizonNord,
     backdropHue: 220,
   },
   {
@@ -90,6 +111,7 @@ export const MOCK_CATALOG: MockContent[] = [
     tagline: "La vérité a plusieurs visages.",
     rating: 4.6,
     poster: poster(5),
+    image: pVerreBrise,
     backdropHue: 0,
   },
   {
@@ -103,6 +125,7 @@ export const MOCK_CATALOG: MockContent[] = [
     tagline: "Quand les feuilles refusent de tomber.",
     rating: 4.4,
     poster: poster(6),
+    image: pSaisonsRouges,
     backdropHue: 25,
   },
   {
@@ -116,6 +139,7 @@ export const MOCK_CATALOG: MockContent[] = [
     tagline: "Êtes-vous toujours vous-même ?",
     rating: 4.2,
     poster: poster(7),
+    image: pProtocole,
     backdropHue: 260,
   },
   {
@@ -129,6 +153,7 @@ export const MOCK_CATALOG: MockContent[] = [
     tagline: "L'océan se souvient.",
     rating: 4.1,
     poster: poster(8),
+    image: pMareesBasses,
     backdropHue: 200,
   },
   {
@@ -142,6 +167,7 @@ export const MOCK_CATALOG: MockContent[] = [
     tagline: "Sous chaque néon, une ombre.",
     rating: 4.5,
     poster: poster(9),
+    image: pNeonPluie,
     backdropHue: 340,
   },
   {
@@ -155,6 +181,7 @@ export const MOCK_CATALOG: MockContent[] = [
     tagline: "Chaque rêve est un engrenage.",
     rating: 4.9,
     poster: poster(10),
+    image: pMecanique,
     backdropHue: 300,
   },
   {
@@ -168,6 +195,7 @@ export const MOCK_CATALOG: MockContent[] = [
     tagline: "Le silence après la tempête.",
     rating: 4.3,
     poster: poster(11),
+    image: pCielCendres,
     backdropHue: 60,
   },
   {
@@ -181,6 +209,7 @@ export const MOCK_CATALOG: MockContent[] = [
     tagline: "Tout pousse, même les secrets.",
     rating: 4.6,
     poster: poster(12),
+    image: pJardins,
     backdropHue: 130,
   },
 ];
