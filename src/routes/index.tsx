@@ -8,8 +8,8 @@ export const Route = createFileRoute("/")({
     meta: [
       { title: "Lumière — Streaming premium pour créateurs et cinéphiles" },
       { name: "description", content: "Films, séries et animation portés par des créateurs indépendants. Découvrez une nouvelle façon de regarder." },
-      { property: "og:title", content: "Lumière — Streaming premium" },
-      { property: "og:description", content: "Films, séries et animation portés par des créateurs indépendants." },
+      { property: "og:title", content: "Lumière — Streaming premium pour créateurs et cinéphiles" },
+      { property: "og:description", content: "Films, séries et animation portés par des créateurs indépendants. Découvrez une nouvelle façon de regarder." },
     ],
   }),
   component: Index,
